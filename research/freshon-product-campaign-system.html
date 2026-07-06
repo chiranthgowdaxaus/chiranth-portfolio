@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreshOn Product + Campaign System — Chiru Gowda</title>
+<meta name="description" content="Case study: building a grocery brand system for FreshOn that holds together from the app mockups to the bilingual Kannada-English shelf label — one identity across five surfaces. By Chiru Gowda.">
+<meta property="og:title" content="FreshOn Product + Campaign System — Chiru Gowda">
+<meta property="og:description" content="One identity across app, social, brochure, packaging, and bilingual retail labels — a system built to keep a grocery brand recognisable from phone screen to shelf.">
+<meta property="og:type" content="article">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+Kannada:wght@400;500&display=swap">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --bg: #000000;
+    --ink: #f7f7f2;
+    --muted: #a5a5a0;
+    --quiet: #6f726d;
+    --line: #20231f;
+    --line-strong: #343a33;
+    --panel: #050605;
+    --panel-soft: #090b09;
+    --lime: #31ff7a;
+    --lime-dim: #1a7f42;
+    --cyan: #56d8ff;
+    --amber: #ffb454;
+    --sans: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --max: 1000px;
+  }
+
+  html { scroll-behavior: smooth; background: var(--bg); }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.6; overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--lime); color: #000; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { margin: 0; font-weight: 700; letter-spacing: -0.01em; }
+  p { margin: 0; }
+  img { display: block; max-width: 100%; -webkit-user-drag: none; user-select: none; }
+
+  .eyebrow { font-family: var(--mono); color: var(--lime); font-size: 0.78rem; letter-spacing: 0.02em; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  .skip {
+    position: absolute; top: -60px; left: 20px; z-index: 300; padding: 8px 12px;
+    border: 1px solid var(--lime); background: #000; color: var(--lime);
+    font-family: var(--mono); font-size: 0.78rem; transition: top 0.2s ease;
+  }
+  .skip:focus { top: 16px; }
+
+  header {
+    position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line);
+    background: rgba(0,0,0,0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .header-inner {
+    max-width: var(--max); margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .back { display: inline-flex; align-items: center; gap: 9px; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); transition: color 0.18s ease; }
+  .back:hover { color: var(--lime); }
+  .back .arrow { color: var(--lime); }
+  .header-tag { font-family: var(--mono); font-size: 0.72rem; color: var(--quiet); }
+
+  .hero { position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(247,247,242,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(247,247,242,0.03) 1px, transparent 1px);
+    background-size: 54px 54px;
+    -webkit-mask-image: radial-gradient(900px 520px at 22% 0%, black, transparent 78%);
+    mask-image: radial-gradient(900px 520px at 22% 0%, black, transparent 78%);
+  }
+  .hero-glow { display: none; }
+  .hero-inner { position: relative; padding: 66px 24px 56px; }
+  .hero h1 { margin: 26px 0 0; font-size: clamp(2.4rem, 6vw, 4.4rem); line-height: 1.02; }
+  .hero .lede { margin: 26px 0 0; max-width: 680px; color: var(--muted); font-size: 1.18rem; line-height: 1.55; text-wrap: pretty; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 14px 34px; margin-top: 36px; padding-top: 26px; border-top: 1px solid var(--line); }
+  .meta-item .k { font-family: var(--mono); color: var(--quiet); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .meta-item .v { margin-top: 5px; font-family: var(--mono); color: var(--ink); font-size: 0.86rem; }
+  .meta-item .v.lime { color: var(--lime); }
+
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--line); border-bottom: 1px solid var(--line); }
+  .metric { background: var(--bg); padding: 30px 24px; }
+  .metric .num { font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 700; line-height: 1; color: var(--lime); letter-spacing: -0.02em; }
+  .metric .lab { margin-top: 12px; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+  .metric .sub { margin-top: 6px; font-family: var(--mono); color: var(--quiet); font-size: 0.68rem; }
+
+  section.block { padding: 62px 0; border-bottom: 1px solid var(--line); }
+  .block-head { display: flex; flex-wrap: wrap; gap: 20px 40px; margin-bottom: 30px; align-items: baseline; }
+  .block-num { flex: 0 0 130px; font-family: var(--mono); color: var(--lime); font-size: 0.78rem; }
+  .block-title { flex: 1 1 380px; min-width: 0; font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.08; }
+  .prose { max-width: 680px; color: var(--muted); font-size: 1.04rem; }
+  .prose + .prose { margin-top: 18px; }
+  .prose strong { color: var(--ink); font-weight: 600; }
+  .prose .hl { color: var(--lime); font-family: var(--mono); font-size: 0.94em; }
+  .lead-in { max-width: 680px; color: var(--muted); font-size: 1.06rem; margin-bottom: 30px; text-wrap: pretty; }
+
+  /* image boards */
+  .board { margin: 30px 0 0; border: 1px solid var(--line); border-radius: 10px; background: #0a0d0a; padding: 14px; }
+  .board img { width: 100%; height: auto; border-radius: 5px; }
+  .board .cap { margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; }
+  .board .cap .t { color: var(--muted); font-family: var(--mono); font-size: 0.72rem; max-width: 620px; line-height: 1.45; }
+  .board .cap .tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; color: var(--quiet); }
+
+  /* figure (diagrams) */
+  .figure { margin: 30px 0 0; border: 1px solid var(--line); border-radius: 10px; background: #0a0d0a; padding: 24px 20px 15px; }
+  .figure svg { display: block; width: 100%; height: auto; }
+  .fig-cap { margin-top: 13px; padding-top: 11px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; }
+  .fig-cap .t { color: var(--muted); font-family: var(--mono); font-size: 0.72rem; max-width: 600px; line-height: 1.45; }
+  .fig-cap .tag { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; color: var(--quiet); }
+
+  /* cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .card { background: var(--bg); padding: 24px; }
+  .card .cn { font-family: var(--mono); color: var(--lime); font-size: 0.72rem; }
+  .card h3 { margin: 14px 0 0; font-size: 1.12rem; font-weight: 600; }
+  .card p { margin: 9px 0 0; color: var(--muted); font-size: 0.95rem; }
+  .card .why { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--line-strong); }
+  .card .why .wl { font-family: var(--mono); color: var(--quiet); font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .card .why p { margin-top: 5px; color: var(--ink); font-size: 0.92rem; }
+
+  /* label anatomy */
+  .anatomy-wrap { display: flex; flex-wrap: wrap; gap: 34px; align-items: flex-start; margin-top: 8px; }
+  .label-card { flex: 0 0 auto; width: min(320px, 100%); border: 1px solid var(--line-strong); border-radius: 12px; background: var(--panel); overflow: hidden; }
+  .lz { padding: 14px 16px; border-bottom: 1px solid var(--line); position: relative; }
+  .lz:last-child { border-bottom: none; }
+  .lz .zt { font-family: var(--mono); color: var(--quiet); font-size: 0.6rem; letter-spacing: 0.09em; text-transform: uppercase; }
+  .lz .zc { margin-top: 5px; color: var(--ink); }
+  .lz.brand .zc { font-family: var(--mono); color: var(--lime); font-size: 0.82rem; letter-spacing: 0.05em; }
+  .lz.name-en .zc { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+  .lz.name-kn .zc { font-family: 'Noto Sans Kannada', var(--sans); font-size: 1.1rem; font-weight: 500; color: var(--muted); }
+  .lz.price { display: flex; justify-content: space-between; align-items: baseline; }
+  .lz.price .zc { font-size: 1.35rem; font-weight: 700; color: var(--lime); }
+  .lz.price .weight { font-family: var(--mono); color: var(--muted); font-size: 0.8rem; }
+  .lz.foot .zc { font-family: var(--mono); color: var(--quiet); font-size: 0.68rem; }
+  .anatomy-notes { flex: 1 1 260px; min-width: 0; }
+  .anatomy-notes ul { margin: 0; padding: 0; list-style: none; }
+  .anatomy-notes li { position: relative; padding: 11px 0 11px 22px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+  .anatomy-notes li:last-child { border-bottom: none; }
+  .anatomy-notes li::before { content: '›'; position: absolute; left: 2px; top: 11px; color: var(--lime); font-family: var(--mono); }
+  .anatomy-notes li strong { color: var(--ink); font-weight: 600; }
+
+  /* clean list */
+  .clean-list { max-width: 700px; margin: 4px 0 0; padding: 0; list-style: none; }
+  .clean-list li { position: relative; padding: 9px 0 9px 26px; color: var(--muted); font-size: 1rem; border-bottom: 1px solid var(--line); }
+  .clean-list li:last-child { border-bottom: none; }
+  .clean-list li::before { content: '›'; position: absolute; left: 4px; top: 9px; color: var(--lime); font-family: var(--mono); }
+  .clean-list li strong { color: var(--ink); font-weight: 600; }
+
+  /* callout */
+  .callout { margin-top: 26px; border: 1px solid var(--line-strong); border-left: 3px solid var(--amber); border-radius: 8px; background: var(--panel); padding: 20px 22px; max-width: 720px; }
+  .callout .cl { font-family: var(--mono); color: var(--amber); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .callout p { margin-top: 10px; color: var(--muted); font-size: 0.98rem; }
+  .callout p strong { color: var(--ink); }
+
+  /* chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 8px; }
+  .chip-tag { border: 1px solid var(--line); border-radius: 6px; padding: 8px 11px; color: var(--muted); font-family: var(--mono); font-size: 0.74rem; transition: border-color 0.18s ease, color 0.18s ease; }
+  .chip-tag:hover { border-color: var(--lime-dim); color: var(--ink); }
+
+  /* footer nav */
+  .footnav { padding: 44px 0; }
+  .footnav-inner { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+  .nav-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 70px; padding: 13px 18px; border: 1px solid var(--line-strong); border-radius: 8px; font-family: var(--mono); font-size: 0.8rem; color: var(--ink); text-align: center; transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease; }
+  .nav-btn:hover { border-color: var(--lime); color: var(--lime); background: rgba(49,255,122,0.05); }
+  .nav-btn.primary { border-color: var(--lime); background: var(--lime); color: #000; }
+  .nav-btn.primary:hover { background: #70ff9d; }
+  footer.page-foot { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--quiet); font-family: var(--mono); font-size: 0.72rem; }
+  .foot-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  @media (max-width: 640px) {
+    .hero-inner { padding: 48px 20px 40px; }
+    section.block { padding: 46px 0; }
+    .block-num { flex-basis: 100%; }
+    .footnav-inner { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header>
+  <div class="header-inner">
+    <a class="back" href="../portfolio_2.html#work" aria-label="Back to portfolio work">
+      <span class="arrow">←</span><span>cd ../work</span>
+    </a>
+    <span class="header-tag">case-study // 03 of 04</span>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow">$ open ./case-study/freshon-product-campaign-system</div>
+      <h1>FreshOn Product + Campaign System</h1>
+      <p class="lede">A grocery brand has to survive contact with a dozen surfaces — a phone screen, a shelf strip, a brochure, a social post, a product wrapper — and still read as one brand. This is the system I built to make that hold, from the app mockups down to the bilingual price label on the shelf.</p>
+      <div class="meta-row">
+        <div class="meta-item"><div class="k">Role</div><div class="v">Product &amp; visual design intern</div></div>
+        <div class="meta-item"><div class="k">Context</div><div class="v">FreshOn · organic grocery, Bengaluru</div></div>
+        <div class="meta-item"><div class="k">Timeframe</div><div class="v">2023 · Feb–Jul</div></div>
+        <div class="meta-item"><div class="k">Focus</div><div class="v lime">Brand system, app to shelf</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCOPE BAND -->
+  <section class="metrics" aria-label="Project scope at a glance">
+    <div class="metric">
+      <div class="num">5</div>
+      <div class="lab">Surfaces held to one identity</div>
+      <div class="sub">app · social · brochure · packaging · labels</div>
+    </div>
+    <div class="metric">
+      <div class="num">2</div>
+      <div class="lab">Languages on the retail labels</div>
+      <div class="sub">Kannada + English hierarchy</div>
+    </div>
+    <div class="metric">
+      <div class="num">1</div>
+      <div class="lab">System, not a stack of one-off posters</div>
+      <div class="sub">built to keep extending</div>
+    </div>
+    <div class="metric">
+      <div class="num">2023</div>
+      <div class="lab">Product &amp; visual design internship</div>
+      <div class="sub">FreshOn.in · Feb–Jul</div>
+    </div>
+  </section>
+
+  <!-- LEAD BOARD -->
+  <section class="block">
+    <div class="wrap">
+      <figure class="board">
+        <img src="../Untitled designfresh.png" alt="FreshOn brand and digital ecosystem presentation board" loading="lazy" decoding="async" draggable="false">
+        <figcaption class="cap">
+          <span class="t">The brand and digital ecosystem — the identity as it appears across app screens, campaigns, and store communication.</span>
+          <span class="tag">brand board</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">00 / the problem</div>
+        <h2 class="block-title">One brand, a dozen surfaces that all behave differently.</h2>
+      </div>
+      <p class="prose">FreshOn is an organic grocery in Bengaluru, and the brand had to show up almost everywhere: an app screen, a social promo, a printed brochure, in-store graphics, packaging, and the price label on the shelf. Each of those surfaces has its own rules — a glowing phone screen, a compressed social thumbnail, and ink printed on a shelf strip do not behave the same way.</p>
+      <p class="prose">The real question was less "make a nice poster" and more: <strong>how do you keep a grocery brand recognisable when the same identity has to move from a phone to a menu to a shelf strip to a product wrapper</strong> — at different sizes, on different materials, read from different distances? A one-off design doesn't answer that. A system does.</p>
+    </div>
+  </section>
+
+  <!-- MY ROLE -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">01 / my role</div>
+        <h2 class="block-title">The brand across product, print, retail, and screen.</h2>
+      </div>
+      <p class="lead-in">I worked across the surfaces below, treating them as one connected identity rather than a pile of separate deliverables.</p>
+      <ul class="clean-list">
+        <li><strong>Social &amp; campaign design</strong> — repeatable layouts for grocery promotions and posts.</li>
+        <li><strong>App UI visuals</strong> — screen concepts designed as part of the same identity, not a separate world.</li>
+        <li><strong>Brochures &amp; store graphics</strong> — printed communication for the in-store experience.</li>
+        <li><strong>Packaging explorations</strong> — how the brand sits on an actual product.</li>
+        <li><strong>Bilingual retail labels</strong> — Kannada-English shelf labels with a clear reading hierarchy.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- THE SYSTEM -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">02 / the system</div>
+        <h2 class="block-title">One identity, radiating outward.</h2>
+      </div>
+      <p class="lead-in">Instead of designing each artifact from a blank page, I built repeatable layouts around the FreshOn identity — so a new promo, screen, or label could be produced quickly and still unmistakably read as FreshOn.</p>
+
+      <figure class="figure">
+        <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ecosystem diagram: the FreshOn identity at the centre, connected to five surfaces — app, social, brochure, packaging and retail labels">
+          <title>The FreshOn identity as the centre of five surfaces</title>
+          <!-- spokes -->
+          <line x1="360" y1="190" x2="360" y2="70"    stroke="#1a7f42" stroke-width="1.3" opacity="0.6"/>
+          <line x1="360" y1="190" x2="597.8" y2="152.9" stroke="#1a7f42" stroke-width="1.3" opacity="0.6"/>
+          <line x1="360" y1="190" x2="506.9" y2="287.1" stroke="#1a7f42" stroke-width="1.3" opacity="0.6"/>
+          <line x1="360" y1="190" x2="213.1" y2="287.1" stroke="#1a7f42" stroke-width="1.3" opacity="0.6"/>
+          <line x1="360" y1="190" x2="122.2" y2="152.9" stroke="#1a7f42" stroke-width="1.3" opacity="0.6"/>
+          <!-- surface nodes -->
+          <g font-family="'JetBrains Mono', ui-monospace, monospace" font-size="11" fill="#f7f7f2" text-anchor="middle">
+            <rect x="300" y="47" width="120" height="46" rx="8" fill="#060806" stroke="#343a33"/>
+            <text x="360" y="74">app</text>
+            <rect x="537.8" y="129.9" width="120" height="46" rx="8" fill="#060806" stroke="#343a33"/>
+            <text x="597.8" y="156.9">social</text>
+            <rect x="446.9" y="264.1" width="120" height="46" rx="8" fill="#060806" stroke="#343a33"/>
+            <text x="506.9" y="291.1">packaging</text>
+            <rect x="153.1" y="264.1" width="120" height="46" rx="8" fill="#060806" stroke="#343a33"/>
+            <text x="213.1" y="291.1">retail labels</text>
+            <rect x="62.2" y="129.9" width="120" height="46" rx="8" fill="#060806" stroke="#343a33"/>
+            <text x="122.2" y="156.9">brochure</text>
+          </g>
+          <!-- centre node -->
+          <rect x="282" y="161" width="156" height="58" rx="10" fill="#31ff7a"/>
+          <text x="360" y="186" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="14" font-weight="700" fill="#000">FRESHON</text>
+          <text x="360" y="204" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" fill="rgba(0,0,0,0.65)">one identity</text>
+        </svg>
+        <figcaption class="fig-cap">
+          <span class="t">Every surface pulls from the same core identity — which is what lets an app screen and a printed shelf label still feel like the same brand.</span>
+          <span class="tag">system map</span>
+        </figcaption>
+      </figure>
+
+      <figure class="board">
+        <img src="../1.png" alt="FreshOn campaign system presentation board showing repeatable promotional layouts" loading="lazy" decoding="async" draggable="false">
+        <figcaption class="cap">
+          <span class="t">The campaign layer — repeatable promotional layouts built on the identity so new posts stay on-brand at speed.</span>
+          <span class="tag">campaign board</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- BILINGUAL LABELS -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">03 / the hard part</div>
+        <h2 class="block-title">Two scripts, one shelf, one second to read it.</h2>
+      </div>
+      <p class="prose">The bilingual retail labels were the most interesting design problem. Kannada and English are two scripts with different visual weight, height, and density — stack them naively and one fights the other. And a shelf label isn't read like a page; it's scanned at arm's length in about a second, so the <strong>hierarchy</strong> is the whole job: what does the eye hit first, and does the price stay legible from a step back?</p>
+      <p class="prose">So I designed the labels around a decided reading order rather than giving both languages equal weight — matching their optical sizes, choosing what leads, and protecting the product name and price at shelf distance.</p>
+
+      <div class="anatomy-wrap">
+        <div class="label-card" aria-label="Anatomy of a bilingual shelf label">
+          <div class="lz brand"><div class="zt">brand mark</div><div class="zc">FRESHON</div></div>
+          <div class="lz name-en"><div class="zt">product name · leads</div><div class="zc">Product name</div></div>
+          <div class="lz name-kn"><div class="zt">product name · Kannada, matched size</div><div class="zc">ಉತ್ಪನ್ನದ ಹೆಸರು</div></div>
+          <div class="lz price"><div><div class="zt">price · protected</div><div class="zc">₹—</div></div><span class="weight">net wt.</span></div>
+          <div class="lz foot"><div class="zt">origin · certification strip</div><div class="zc">organic · sourced · batch</div></div>
+        </div>
+        <div class="anatomy-notes">
+          <ul>
+            <li><strong>Decide the lead.</strong> Both languages can't be first; the product name carries the primary size, the second script sits at a matched optical weight beneath it.</li>
+            <li><strong>Protect the price.</strong> On a shelf, price legibility beats decoration — it holds its own zone and contrast.</li>
+            <li><strong>One hierarchy, not two.</strong> The scripts share a single reading order instead of competing for attention.</li>
+            <li><strong>Read at distance.</strong> Sizes and contrast are set for arm's length, not for a screen you hold close.</li>
+          </ul>
+        </div>
+      </div>
+
+      <figure class="board">
+        <img src="../2.png" alt="FreshOn bilingual Kannada-English retail label presentation board" loading="lazy" decoding="async" draggable="false">
+        <figcaption class="cap">
+          <span class="t">The bilingual retail labels — Kannada and English sharing one hierarchy across the range.</span>
+          <span class="tag">label board</span>
+        </figcaption>
+      </figure>
+      <p class="fig-cap" style="border:none;padding:0;margin-top:10px;"><span class="t" style="max-width:none;">The Kannada in the anatomy above is a placeholder ("ಉತ್ಪನ್ನದ ಹೆಸರು" = "product name"); the board shows the real label copy.</span></p>
+    </div>
+  </section>
+
+  <!-- DECISIONS -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">04 / decisions that mattered</div>
+        <h2 class="block-title">The judgment calls, and why I made them.</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="cn">decision_01</div>
+          <h3>Build a system, not posters</h3>
+          <p>Repeatable layouts around the identity instead of designing each promo from scratch.</p>
+          <div class="why"><div class="wl">why</div><p>A grocery ships new promotions constantly. A system keeps everything on-brand at speed and lets someone who isn't a designer stay consistent — it scales past me.</p></div>
+        </div>
+        <div class="card">
+          <div class="cn">decision_02</div>
+          <h3>Decide what the label leads with</h3>
+          <p>A set reading order for the bilingual labels rather than equal weight for both scripts.</p>
+          <div class="why"><div class="wl">why</div><p>Bilingual plus shelf distance means you can't center everything. Choosing the lead — product, then price, then the script pairing — is what makes it readable.</p></div>
+        </div>
+        <div class="card">
+          <div class="cn">decision_03</div>
+          <h3>Packaging and app as one ecosystem</h3>
+          <p>Designed the on-product and on-screen experiences to belong together.</p>
+          <div class="why"><div class="wl">why</div><p>A customer meets the brand on the shelf and on their phone in the same week. Those touchpoints should feel like one thing, not two teams.</p></div>
+        </div>
+        <div class="card">
+          <div class="cn">decision_04</div>
+          <h3>Design for the material, not the screen</h3>
+          <p>Judged colour and contrast for where each surface actually lives.</p>
+          <div class="why"><div class="wl">why</div><p>A colour that pops on a backlit phone can go flat as printed ink. The label had to work on paper and plastic, not just in the design file.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGES -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">05 / challenges</div>
+        <h2 class="block-title">Where it got hard.</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="cn">challenge_01</div>
+          <h3>Wildly different surfaces</h3>
+          <p>The same mark on a 1080px social tile and a small printed shelf strip.</p>
+          <div class="why"><div class="wl">fix</div><p>Identity rules that survive scaling, plus a layout system rather than one-off compositions per artifact.</p></div>
+        </div>
+        <div class="card">
+          <div class="cn">challenge_02</div>
+          <h3>Two scripts competing</h3>
+          <p>Kannada and English have different density and height; naive stacking makes them clash.</p>
+          <div class="why"><div class="wl">fix</div><p>Matched optical sizes and one decided reading order, so the scripts cooperate instead of fighting.</p></div>
+        </div>
+        <div class="card">
+          <div class="cn">challenge_03</div>
+          <h3>Screen colour vs printed ink</h3>
+          <p>What looks right on a monitor can shift once it's printed.</p>
+          <div class="why"><div class="wl">fix</div><p>Checked contrast and colour for the material each surface uses, not just the on-screen preview.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY IT MATTERS -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">06 / why it matters</div>
+        <h2 class="block-title">The reason my portfolio isn't only data.</h2>
+      </div>
+      <p class="prose">I can run the analysis — but I also care about the final object: how it looks, how it reads, whether it feels consistent, and whether a person can actually use it. FreshOn is where that half of my work lives.</p>
+      <div class="callout">
+        <div class="cl">the throughline</div>
+        <p><strong>Analysis is only useful once someone can read it.</strong> The same instinct that makes a shelf label legible at arm's length — decide the hierarchy, protect what matters, design for the real context — is the one I bring to a dashboard or a report. Sitting between the data and the design is where I'm most useful.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head">
+        <div class="block-num">07 / stack</div>
+        <h2 class="block-title">Tools.</h2>
+      </div>
+      <div class="chips">
+        <span class="chip-tag">Figma</span>
+        <span class="chip-tag">Illustrator</span>
+        <span class="chip-tag">Photoshop</span>
+        <span class="chip-tag">Midjourney</span>
+        <span class="chip-tag">Leonardo</span>
+        <span class="chip-tag">brand systems</span>
+        <span class="chip-tag">layout templates</span>
+        <span class="chip-tag">Kannada + English typesetting</span>
+        <span class="chip-tag">packaging</span>
+        <span class="chip-tag">print production</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOT NAV -->
+  <section class="footnav">
+    <div class="wrap footnav-inner">
+      <a class="nav-btn" href="afl-crowd-monitoring.html">← AFL Crowd Monitoring Heatmap</a>
+      <a class="nav-btn" href="../portfolio_2.html#work">all work →</a>
+    </div>
+  </section>
+</main>
+
+<footer class="page-foot">
+  <div class="wrap foot-inner">
+    <span>Chiru Gowda / case study — FreshOn product + campaign system</span>
+    <span>black / signal green</span>
+  </div>
+</footer>
+
+<script>
+  // preserve the light image-protection the original page used
+  document.querySelectorAll('img').forEach((img) => {
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Field note by Chiru Gowda on business analysis, data analysis, product thinking, and UI/UX communication.">
+<title>Business Analyst Field Notes - Chiru Gowda</title>
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  :root {
+    --bg: #050505;
+    --ink: #f6f4ee;
+    --muted: #a0a6a0;
+    --line: #2b312b;
+    --lime: #31ff7a;
+    --panel: #0b0d0c;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      var(--bg);
+    background-size: 72px 72px, 72px 72px, auto;
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.6;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.2;
+    mix-blend-mode: screen;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.98' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23noise)' opacity='0.72'/%3E%3C/svg%3E");
+    background-size: 140px 140px;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .page {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 28px 24px 80px;
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: center;
+    padding: 14px 0 42px;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+  }
+
+  .topbar a {
+    color: var(--lime);
+    text-decoration: none;
+  }
+
+  .hero {
+    padding: clamp(44px, 7vw, 90px) 0 58px;
+  }
+
+  .eyebrow {
+    color: var(--lime);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    margin: 0;
+    max-width: 960px;
+    font-size: clamp(3rem, 8.8vw, 7.8rem);
+    line-height: 0.9;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .lead {
+    margin: 28px 0 0;
+    max-width: 760px;
+    color: #b4bab3;
+    font-size: clamp(1.12rem, 2vw, 1.45rem);
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+  }
+
+  .pills span {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: #d5dad4;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .note-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--line);
+    background: var(--line);
+    gap: 1px;
+  }
+
+  .note {
+    min-height: 260px;
+    padding: 28px;
+    background:
+      radial-gradient(circle at 88% 16%, rgba(49, 255, 122, 0.11), transparent 30%),
+      var(--panel);
+  }
+
+  .note h2 {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    color: var(--lime);
+    font-family: var(--mono);
+    font-weight: 500;
+  }
+
+  .note p,
+  .note li {
+    color: #b7bdb6;
+  }
+
+  .note p {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  li + li {
+    margin-top: 10px;
+  }
+
+  .wide {
+    margin-top: 1px;
+    border: 1px solid var(--line);
+    padding: 34px;
+    background: #070807;
+  }
+
+  .wide h2 {
+    margin: 0 0 18px;
+    font-size: clamp(1.8rem, 4vw, 3.4rem);
+    line-height: 1;
+  }
+
+  .wide p {
+    margin: 0;
+    color: #b7bdb6;
+    max-width: 860px;
+  }
+
+  @media (max-width: 760px) {
+    .note-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .topbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+  /* Homepage-aligned theme overrides */
+  :root {
+    --bg: #000000;
+    --ink: #f7f7f2;
+    --muted: #a5a5a0;
+    --quiet: #6f726d;
+    --line: #20231f;
+    --line-strong: #343a33;
+    --panel: #050605;
+    --panel-soft: #090b09;
+  }
+
+  body {
+    background: #000;
+    color: var(--ink);
+  }
+
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  .page {
+    max-width: 1180px;
+    padding: 28px 24px 96px;
+  }
+
+  .topbar {
+    margin-bottom: 64px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topbar span {
+    color: var(--lime);
+  }
+
+  .topbar a {
+    color: var(--muted);
+  }
+
+  .topbar a:hover,
+  .topbar a:focus-visible {
+    color: var(--lime);
+  }
+
+  .hero,
+  .case-hero {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: #000;
+  }
+
+  .pills span,
+  .note,
+  .wide {
+    border-color: var(--line);
+    background: #000;
+    box-shadow: none;
+  }
+</style>
+</head>
+<body class="case-page" data-project="business">
+<main class="page">
+  <nav class="topbar" aria-label="Research navigation">
+    <span>field-notes / business analysis</span>
+    <a href="../portfolio_2.html#work">back to portfolio -></a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">$ open business_analyst_field_notes.md</div>
+    <h1>Business Analyst Field Notes</h1>
+    <p class="lead">A note on how I approach roles that sit between business questions, data, product design, stakeholders, and delivery.</p>
+    <div class="pills" aria-label="Topics">
+      <span>business analysis</span>
+      <span>BI reporting</span>
+      <span>stakeholders</span>
+      <span>product thinking</span>
+      <span>UX communication</span>
+    </div>
+  </header>
+
+  <section class="note-grid" aria-label="Case note sections">
+    <article class="note">
+      <h2>01 / Start With The Decision</h2>
+      <p>I try to understand what decision the work is supposed to improve. That keeps analysis from becoming decoration and keeps dashboards from becoming storage rooms for charts.</p>
+    </article>
+
+    <article class="note">
+      <h2>02 / Find The Mess</h2>
+      <p>The useful problem is usually hidden in messy data, unclear ownership, manual workflows, vague requirements, or interfaces that make people work harder than they need to.</p>
+    </article>
+
+    <article class="note">
+      <h2>03 / Build The Bridge</h2>
+      <ul>
+        <li>Translate stakeholder language into questions that can be tested.</li>
+        <li>Turn raw data into summaries, flows, or prototypes that people can react to.</li>
+        <li>Document enough context so the next person can continue the work.</li>
+      </ul>
+    </article>
+
+    <article class="note">
+      <h2>04 / Finish In Human Language</h2>
+      <p>The output should be usable by someone who did not sit inside the analysis process. That might be a KPI summary, a dashboard, a product flow, a handoff doc, or a cleaner visual system.</p>
+    </article>
+  </section>
+
+  <section class="wide">
+    <h2>What This Says About My Work</h2>
+    <p>I am focused on data analyst, business analyst, BI, and operations roles because my strongest work is cross-functional without being scattered. I can read the data, shape the artifact, and explain the tradeoff in plain language.</p>
+  </section>
+
+  <footer class="case-footer">
+    <span>Chiru Gowda / business analyst field notes</span>
+    <a href="../portfolio_2.html#work">all work -></a>
+  </footer>
+</main>
+</body>
+</html>
