@@ -1,0 +1,372 @@
+:root {
+  --motion-ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-fast: 240ms;
+  --motion-medium: 560ms;
+  --motion-slow: 760ms;
+}
+
+html,
+body {
+  overflow-x: clip;
+}
+
+html.motion-ready [data-motion] {
+  opacity: 0;
+  will-change: opacity, transform, clip-path;
+}
+
+html.motion-ready [data-motion="title"] {
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(24px);
+}
+
+html.motion-ready [data-motion="left"] {
+  transform: translateX(-18px);
+}
+
+html.motion-ready [data-motion="right"] {
+  transform: translateX(22px);
+}
+
+html.motion-ready [data-motion="rise"] {
+  transform: translateY(18px);
+}
+
+html.motion-ready [data-motion="scale"] {
+  transform: scale(0.985);
+}
+
+html.motion-ready [data-motion="metric"] {
+  clip-path: inset(100% 0 0 0);
+  transform: translateY(8px);
+}
+
+html.motion-ready [data-motion="figure"] {
+  clip-path: inset(0 0 12% 0);
+  transform: translateY(14px) scale(0.992);
+}
+
+html.motion-ready [data-motion].is-motion-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition:
+    opacity var(--motion-medium) var(--motion-ease-soft) var(--motion-delay, 0ms),
+    transform var(--motion-medium) var(--motion-ease-enter) var(--motion-delay, 0ms);
+}
+
+html.motion-ready [data-motion="title"].is-motion-visible,
+html.motion-ready [data-motion="metric"].is-motion-visible,
+html.motion-ready [data-motion="figure"].is-motion-visible {
+  clip-path: inset(0 0 0 0);
+  transition:
+    opacity var(--motion-medium) var(--motion-ease-soft) var(--motion-delay, 0ms),
+    transform var(--motion-medium) var(--motion-ease-enter) var(--motion-delay, 0ms),
+    clip-path var(--motion-slow) var(--motion-ease-enter) var(--motion-delay, 0ms);
+}
+
+html.motion-ready [data-motion="title"].is-motion-visible {
+  transition-duration: var(--motion-slow);
+}
+
+html.motion-ready [data-motion="metric"].is-motion-visible {
+  transition-duration: 680ms;
+}
+
+html.motion-ready .figure[data-motion] polyline.motion-trace {
+  stroke-dasharray: var(--trace-length);
+  stroke-dashoffset: var(--trace-length);
+}
+
+html.motion-ready .figure[data-motion].is-motion-visible polyline.motion-trace {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.15s var(--motion-ease-soft) calc(var(--motion-delay, 0ms) + 180ms);
+}
+
+.system-flow-dot,
+.heat-pulse,
+.signal-scanline {
+  pointer-events: none;
+}
+
+.figure.has-live-signal {
+  position: relative;
+}
+
+.signal-live-badge {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 8px;
+  border: 1px solid #343a33;
+  border-radius: 4px;
+  background: #0a0d0a;
+  color: #a5a5a0;
+  font-family: var(--mono, "JetBrains Mono", ui-monospace, monospace);
+  font-size: 0.56rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.signal-live-badge > span {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: #55b05a;
+  animation: live-feed-status 1.15s steps(1, end) infinite;
+}
+
+.signal-scanline {
+  stroke: #55b05a;
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  opacity: 0.68;
+}
+
+.detected-peak {
+  opacity: 0;
+  transform: scale(0.35);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 90ms linear,
+    transform 220ms var(--motion-ease-enter);
+}
+
+.detected-peak.is-detected {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.detected-peak.is-detecting {
+  animation: peak-recognized 430ms var(--motion-ease-enter) both;
+}
+
+@keyframes peak-recognized {
+  0% {
+    opacity: 0;
+    transform: scale(0.35);
+  }
+  48% {
+    opacity: 1;
+    transform: scale(1.65);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes live-feed-status {
+  0%, 48% { opacity: 1; }
+  49%, 100% { opacity: 0.25; }
+}
+
+.freshon-system-map .freshon-spoke {
+  stroke-dasharray: var(--spoke-length);
+  stroke-dashoffset: var(--spoke-length);
+}
+
+.figure.is-motion-visible .freshon-system-map .freshon-spoke {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 720ms var(--motion-ease-enter) var(--spoke-delay, 160ms);
+}
+
+.freshon-system-map .freshon-surface-node {
+  opacity: 0;
+  transform: scale(0.92);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.figure.is-motion-visible .freshon-system-map .freshon-surface-node {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 420ms ease var(--node-delay, 380ms),
+    transform 620ms var(--motion-ease-enter) var(--node-delay, 380ms);
+}
+
+.system-flow-dot {
+  opacity: 0.9;
+}
+
+.heat-pulse {
+  fill: none;
+  stroke-width: 4;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.stadium-card.is-motion-visible .heat-pulse {
+  animation: heatmap-pulse 3.6s var(--motion-ease-soft) var(--pulse-delay, 0ms) infinite;
+}
+
+@keyframes heatmap-pulse {
+  0%, 18% {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  32% {
+    opacity: 0.68;
+  }
+  72%, 100% {
+    opacity: 0;
+    transform: scale(1.18);
+  }
+}
+
+html.motion-ready .stadium-card[data-motion] #stadium-dots {
+  opacity: 0;
+  transform: scale(0.985);
+  transform-origin: center;
+}
+
+html.motion-ready .stadium-card[data-motion].is-motion-visible #stadium-dots {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 900ms var(--motion-ease-soft) calc(var(--motion-delay, 0ms) + 180ms),
+    transform 1.1s var(--motion-ease-enter) calc(var(--motion-delay, 0ms) + 180ms);
+}
+
+.button,
+.sound-toggle,
+.decrypt-button,
+.nav-btn,
+.back,
+.topbar a {
+  transition-property: color, background-color, border-color, transform;
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--motion-ease-soft);
+}
+
+.button:hover,
+.button:focus-visible,
+.sound-toggle:hover,
+.sound-toggle:focus-visible,
+.decrypt-button:hover,
+.decrypt-button:focus-visible,
+.nav-btn:hover,
+.nav-btn:focus-visible {
+  transform: translateY(-2px);
+}
+
+.button:active,
+.sound-toggle:active,
+.decrypt-button:active,
+.nav-btn:active {
+  transform: translateY(0);
+  transition-duration: 100ms;
+}
+
+.work-row,
+.experience-row,
+.focus-item,
+.card,
+.pstep,
+.note,
+.chip-tag {
+  transition:
+    transform var(--motion-fast) var(--motion-ease-soft),
+    border-color var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+a.work-row:hover,
+a.work-row:focus-visible {
+  transform: translateX(4px);
+}
+
+.work-row .row-action,
+.back .arrow {
+  display: inline-block;
+  transition: transform var(--motion-fast) var(--motion-ease-enter);
+}
+
+a.work-row:hover .row-action,
+a.work-row:focus-visible .row-action {
+  transform: translateX(5px);
+}
+
+.back:hover .arrow,
+.back:focus-visible .arrow {
+  transform: translateX(-3px);
+}
+
+.focus-item:hover,
+.card:hover,
+.pstep:hover,
+.note:hover {
+  transform: translateY(-3px);
+}
+
+.contact-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-link::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: var(--lime);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform var(--motion-fast) var(--motion-ease-enter);
+}
+
+.contact-link:hover::before,
+.contact-link:focus-visible::before {
+  transform: scaleY(1);
+}
+
+/* Keep repeated card collections balanced instead of exposing an empty grid cell. */
+.cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cards > .card:last-child:nth-child(odd),
+.note-grid > .note:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 760px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cards > .card:last-child:nth-child(odd),
+  .note-grid > .note:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.motion-ready [data-motion],
+  html.motion-ready [data-motion].is-motion-visible,
+  html.motion-ready .figure[data-motion] polyline.motion-trace,
+  html.motion-ready .stadium-card[data-motion] #stadium-dots,
+  .freshon-system-map .freshon-spoke,
+  .freshon-system-map .freshon-surface-node {
+    opacity: 1 !important;
+    clip-path: none !important;
+    transform: none !important;
+    transition: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  .signal-live-badge,
+  .signal-scanline,
+  .system-flow-dot,
+  .heat-pulse {
+    display: none !important;
+  }
+}
