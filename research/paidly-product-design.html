@@ -13,10 +13,10 @@
 <link rel="preload" href="../assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script src="../assets/theme-init.js?v=20261019b"></script>
-<link rel="stylesheet" href="../assets/site.css?v=20261019b">
+<link rel="stylesheet" href="../assets/site.css?v=20261020a">
 <script defer src="../assets/vendor/gsap-3.15.0.min.js"></script>
 <script defer src="../assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
-<script defer src="../assets/site.js?v=20261019b"></script>
+<script defer src="../assets/site.js?v=20261020a"></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -33,18 +33,7 @@
 <dl class="case-meta"><div><dt>My role</dt><dd>Product design &amp; development</dd></div><div><dt>Context</dt><dd>Personal project</dd></div><div><dt>When</dt><dd>2026</dd></div></dl></div>
 
 </section>
-<figure class="case-demo" data-reveal><div class="app-demo" data-app-demo role="region" aria-label="Paidly interactive interface concept">
-<div class="demo-brand"><strong>Paidly</strong><span>Bill tracker</span></div>
-<p class="demo-heading" data-demo-heading>Your next payments</p>
-<div class="demo-overview"><div><p class="demo-total" data-demo-total>A$80</p><p class="demo-count" data-demo-count>2 bills upcoming</p></div>
-<div class="demo-tabs" role="group" aria-label="Filter sample bills"><button class="demo-tab" type="button" data-demo-filter="upcoming" aria-pressed="true" disabled>Upcoming</button><button class="demo-tab" type="button" data-demo-filter="paid" aria-pressed="false" disabled>Paid</button></div></div>
-<ul class="demo-bills" aria-label="Sample bills">
-<li class="bill-row" data-demo-bill="internet" data-amount="65" data-name="Internet"><span class="bill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8a14 14 0 0 1 18 0M6 11a9 9 0 0 1 12 0m-9 3a4.5 4.5 0 0 1 6 0"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span><div><p class="bill-name">Internet</p><p class="bill-date">22 Oct</p></div><span class="bill-amount">A$65</span><button class="bill-action" type="button" data-mark-paid aria-label="Mark Internet as paid in the demo" disabled>Mark paid</button></li>
-<li class="bill-row" data-demo-bill="subscription" data-amount="15" data-name="Subscription"><span class="bill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18m-14 5h4"/></svg></span><div><p class="bill-name">Subscription</p><p class="bill-date">22 Oct</p></div><span class="bill-amount">A$15</span><button class="bill-action" type="button" data-mark-paid aria-label="Mark Subscription as paid in the demo" disabled>Mark paid</button></li>
-</ul><p class="demo-empty" data-demo-empty hidden>No bills here yet.</p>
-<div class="demo-footer"><p class="demo-status" role="status" aria-live="polite" data-demo-status>Local demo. No real payments.</p><button class="demo-reset" type="button" data-demo-reset disabled>Reset demo</button></div>
-<noscript><p class="demo-status">Enable JavaScript to try the interface.</p></noscript>
-</div><figcaption class="demo-caption">Interactive interface concept. Sample data. The build notes below describe the implemented app.</figcaption></figure>
+<figure class="case-app-shot" data-reveal><a class="app-screen-link" href="../assets/paidly-home-private.webp" target="_blank" rel="noopener noreferrer" aria-label="Open full Paidly screenshot in a new tab"><img src="../assets/paidly-home-private.webp" width="588" height="1280" alt="Paidly home screen with bill summaries and payment cards. Private bill details masked." loading="lazy" decoding="async"></a><figcaption>Paidly on iPhone. Private bill details masked. <a class="text-link" href="../assets/paidly-home-private.webp" target="_blank" rel="noopener noreferrer">View full screen <span class="sr-only">(opens in a new tab)</span></a></figcaption></figure>
 <section class="case-summary" aria-label="Project overview"><article><h2>The task</h2><p>Keep recurring bills, payment history and shared costs in one place without making everyday actions hard to find.</p></article><article><h2>What I designed</h2><p>Four-tab navigation, bill cards, a due-date calendar and distinct states for bills and shared balances.</p></article><article><h2>What I built</h2><p>The interface, recurring-bill logic, sign-in and stored records. An iOS build is uploaded for internal TestFlight testing.</p></article></section>
 <section class="design-flow" aria-labelledby="flow-title" data-reveal><h2 id="flow-title">One everyday flow</h2>
 <ol class="flow-line" aria-label="Record a bill payment"><li>Find a bill <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Check details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Mark paid</li></ol>
