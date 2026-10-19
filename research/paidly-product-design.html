@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Paidly UI/UX case study by Chiru Gowda. Bill-tracking flows, four-tab navigation, calendar layout and clear payment states, with real interface captures.">
+<meta name="theme-color" content="#151716">
+<title>Paidly: UI/UX &amp; Product Design | Chiru Gowda</title>
+<meta property="og:title" content="Paidly: UI/UX &amp; Product Design | Chiru Gowda">
+<meta property="og:description" content="The flow, navigation and layout decisions behind a bill-tracking app I designed and built.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="../assets/theme-init.js?v=20261019"></script>
+<link rel="stylesheet" href="../assets/site.css?v=20261019">
+<script defer src="../assets/vendor/gsap-3.15.0.min.js"></script>
+<script defer src="../assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="../assets/site.js?v=20261019"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="reading-progress" aria-hidden="true"></div>
+<header class="site-header"><div class="wrap header-inner">
+<a class="brand" href="../index.html" aria-label="Chiru Gowda home">Chiru Gowda<span>.</span></a>
+<nav class="nav" aria-label="Main navigation"><a class="nav-work" href="../index.html#work">Work</a><a href="../about.html">Off the clock</a><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg></button><a class="button button-dark" href="../index.html#contact">Contact</a></nav>
+</div></header>
+<main class="wrap case-main" id="main">
+<p class="breadcrumb"><a href="../index.html#work">Selected work</a> / Paidly</p>
+<section class="case-hero" aria-labelledby="case-title">
+<div><h1 class="case-title" id="case-title">Paidly<span class="accent">Bills, made clearer.</span></h1>
+<p class="case-lede">I designed and built a bill-tracking app around three questions: what's due, when is it due, and has it been paid?</p>
+<dl class="case-meta"><div><dt>My role</dt><dd>Product design &amp; development</dd></div><div><dt>Context</dt><dd>Personal project</dd></div><div><dt>When</dt><dd>2026</dd></div></dl></div>
+<figure class="case-visual"><div class="paidly-stage"><span class="product-screen"><img src="../assets/paidly-home.webp" width="390" height="844" alt="Paidly Home showing sample bills and Mark paid actions"></span><span class="product-screen"><img src="../assets/paidly-calendar.webp" width="390" height="844" alt="Paidly Calendar with a selected date and its sample bills"></span></div></figure>
+</section>
+<section class="case-summary" aria-label="Project overview"><article><h2>The task</h2><p>Keep recurring bills, payment history and shared costs in one place without making everyday actions hard to find.</p></article><article><h2>What I designed</h2><p>Four-tab navigation, bill cards, a due-date calendar and distinct states for bills and shared balances.</p></article><article><h2>What I built</h2><p>The interface, recurring-bill logic, sign-in and stored records. An iOS build is uploaded for internal TestFlight testing.</p></article></section>
+<section class="design-flow" aria-labelledby="flow-title" data-reveal><h2 id="flow-title">One everyday flow</h2>
+<ol class="flow-line" aria-label="Record a bill payment"><li>Find a bill <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Check details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Mark paid</li></ol>
+<p>Home surfaces bills and their due dates. Each card keeps its payment action in a consistent place. Marking paid records the payment and creates the next recurring bill once. Paidly records balances; it does not move money.</p>
+</section>
+<section class="case-summary" aria-label="UI and interaction decisions">
+<article><h2>Fewer destinations</h2><p>I reduced six navigation items to four: Home, Calendar, Overview and Settings. Payment history sits in Settings rather than taking another tab.</p></article>
+<article><h2>Room for the action</h2><p>Bill cards reserve space for the payment button. I adjusted long titles, dates and spacing after checking narrow layouts at 320 and 390 pixels.</p></article>
+<article><h2>Stable calendar layout</h2><p>Bill markers sit inside each date cell without moving the date number. Selecting a date brings its bills below the calendar.</p></article>
+</section>
+<section class="case-screens" aria-label="Actual Paidly screens using sample data" data-reveal>
+<figure><img src="../assets/paidly-home.webp" width="390" height="844" alt="Paidly Home with a 65-dollar sample internet bill and a 15-dollar sample subscription" loading="lazy"><figcaption>Home: due dates and payment actions. Sample data.</figcaption></figure>
+<figure><img src="../assets/paidly-calendar.webp" width="390" height="844" alt="Paidly Calendar with 22 October selected and sample bills listed underneath" loading="lazy"><figcaption>Calendar: bills grouped by due date. Sample data.</figcaption></figure>
+</section>
+<section class="case-summary" aria-label="Design implementation and limits">
+<article><h2>Separate payment states</h2><p>A bill being paid to a merchant is different from everyone settling a shared balance. Those states stay separate so one action does not imply both.</p></article>
+<article><h2>Design through to code</h2><p>I worked on the flows, reusable UI and implementation together. Layout checks caught a header covering content and cramped bill-card actions, which I corrected.</p></article>
+<article><h2>What still needs testing</h2><p>Two-account split syncing and alerts on physical devices remain unverified. This is an implemented design with internal testing, not a claim of measured user outcomes.</p></article>
+</section>
+<p class="tool-line">TypeScript · React Native · Expo · Supabase · PostgreSQL</p>
+<nav class="case-next" aria-label="More projects"><a class="text-link" href="../index.html#work">All work</a><a class="text-link" href="wearable-sensor-analytics.html">Next: wearable sensor analytics <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></nav>
+</main>
+<footer class="wrap site-footer"><span>© 2026 Chiru Gowda</span><a class="footer-person" href="../about.html">Off the clock</a><a class="text-link" href="#top">Back to top <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5m-6 6 6-6 6 6"/></svg></a></footer>
+</body></html>

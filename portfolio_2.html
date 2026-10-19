@@ -1,66 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Chiru Gowda, data analyst in Melbourne. Python, SQL, sensor analytics and data visualisation. View project notes, recent apps and a downloadable resume.">
-<meta name="theme-color" content="#f8f9fc">
-<title>Chiru Gowda | Data Analyst in Melbourne</title>
-<meta property="og:title" content="Chiru Gowda | Data Analyst in Melbourne">
-<meta property="og:description" content="Python, SQL, sensor analytics and data visualisation. Project notes, recent apps and a downloadable resume.">
-<meta property="og:type" content="website">
+<meta name="description" content="Chiru Gowda, data analyst and UI/UX designer in Melbourne. Data analysis, product design and working apps, with real project details and a downloadable resume.">
+<meta name="theme-color" content="#151716">
 <link rel="canonical" href="/">
+<title>Chiru Gowda | Data Analysis, UI/UX &amp; App Development</title>
+<meta property="og:title" content="Chiru Gowda | Data Analysis &amp; UI/UX Design">
+<meta property="og:description" content="Data analysis, product design and working apps. Explore what I can help with, then see the design and implementation behind my projects.">
+<meta property="og:type" content="website">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="assets/site.css">
-<script defer src="assets/site.js"></script>
+<script src="assets/theme-init.js?v=20261019"></script>
+<link rel="stylesheet" href="assets/site.css?v=20261019">
+<script defer src="assets/vendor/gsap-3.15.0.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="assets/site.js?v=20261019"></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="reading-progress" aria-hidden="true"></div>
 <header class="site-header"><div class="wrap header-inner">
 <a class="brand" href="index.html" aria-label="Chiru Gowda home">Chiru Gowda<span>.</span></a>
 <nav class="nav" aria-label="Main navigation">
-<a class="nav-work" href="#work">Work</a><a class="nav-experience" href="#experience">Experience</a><a href="about.html">Off the clock</a><a class="button button-dark" href="#contact">Let's talk</a>
+<a class="nav-work" href="#work">Work</a><a class="nav-expertise" href="#expertise">Expertise</a><a href="about.html">Off the clock</a><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg></button><a class="button button-dark" href="#contact">Contact</a>
 </nav></div></header>
 <main id="main" class="wrap">
 <section class="hero" aria-labelledby="hero-title">
 <div class="hero-grid"><div class="hero-text">
-<h1 id="hero-title">Chiru <span>Gowda.</span></h1>
-<p class="hero-intro">I'm a data analyst based in Melbourne.</p>
-<p class="hero-description">I use Python and SQL for data analysis. I've worked on sensor pipelines and crowd visualisation, and I build apps in my spare time.</p>
-<div class="hero-actions"><a class="button" href="#work">View my work <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="button button-outline" href="assets/Chiranth_Gowda_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="View résumé (PDF, opens in a new tab)">View résumé <span class="file-type">PDF</span></a></div>
-<p class="availability">Melbourne, Australia · Open to analyst &amp; BI roles</p>
-</div><figure class="hero-portrait"><div class="portrait"><img src="assets/chiranth-gowda-portrait.webp" width="1131" height="1600" alt="Chiru Gowda in a black suit" fetchpriority="high" decoding="async"></div></figure></div>
-<ul class="skill-rail" aria-label="Core skills"><li>Python</li><li>SQL</li><li>Power BI</li><li>Data visualisation</li><li>Machine learning</li></ul>
-</section>
-<section class="section" id="work" aria-labelledby="work-title">
-<div class="section-heading"><div><h2 id="work-title">Selected work</h2><p>Project notes from Redback Operations and FreshOn.</p></div></div>
-<div class="project-grid">
-<a class="project" href="research/wearable-sensor-analytics.html" aria-labelledby="sensor-title">
-<div class="project-media"><img src="assets/sensor-preview.svg" alt="Illustrative EMG traces showing muscle-activation patterns" width="600" height="350" loading="lazy"></div>
-<p class="project-type">01 / Data &amp; machine learning</p><h3 id="sensor-title">Wearable sensor analytics</h3>
-<p class="project-description">Python pipelines and machine-learning models for EMG and knee-angle data.</p><span class="text-link">Project details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></span></a>
-<a class="project" href="research/afl-crowd-monitoring.html" aria-labelledby="crowd-title">
-<div class="project-media"><img src="assets/crowd-preview.svg" alt="Illustrative stadium heatmap showing crowd-density hotspots" width="600" height="350" loading="lazy"></div>
-<p class="project-type">02 / Data visualisation</p><h3 id="crowd-title">AFL crowd monitoring</h3>
-<p class="project-description">A Python service that validates density grids and generates crowd heatmaps.</p><span class="text-link">Project details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></span></a>
-<a class="project" href="research/freshon-product-campaign-system.html" aria-labelledby="freshon-title">
-<div class="project-media"><img src="assets/freshon-preview.webp" alt="FreshOn identity across its app, campaign, packaging and retail labels" width="840" height="601" loading="lazy"></div>
-<p class="project-type">03 / Product &amp; visual design</p><h3 id="freshon-title">FreshOn design work</h3>
-<p class="project-description">App concepts, packaging and retail labels in Kannada and English.</p><span class="text-link">Project details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></span></a>
+<h1 id="hero-title"><span class="headline-line">Data analyst.</span><span class="headline-line accent">UI/UX designer.</span></h1>
+<div class="hero-person"><span class="hero-avatar"><img src="assets/chiranth-gowda-portrait.webp" width="1131" height="1600" alt="Chiru Gowda" decoding="async"></span><p>I'm Chiru, based in Melbourne. I analyse data, design interfaces and build apps.</p></div>
+<div class="hero-actions"><a class="button" href="#work">View my work <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><a class="button button-outline" href="assets/Chiranth_Gowda_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Résumé PDF, opens in a new tab">Résumé PDF <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
+<p class="availability">Open to roles and projects</p>
 </div>
-<a class="recent-projects" href="research/personal-projects.html"><div><span class="build-label">Recent personal projects</span><strong>Paidly, Repway and Monday Transit</strong></div><span class="text-link">App notes <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></span></a>
+<figure class="hero-showcase"><div class="device-scene">
+<a class="screen-phone phone-front" href="research/paidly-product-design.html" aria-label="View Paidly UI/UX case study"><img src="assets/paidly-home.webp" width="390" height="844" alt="Paidly Home interface with clearly labelled sample bills" fetchpriority="high" decoding="async"></a>
+<a class="screen-phone phone-back" href="research/personal-projects.html#repway" aria-label="View Repway project"><img src="assets/repway-home.webp" width="600" height="1333" alt="Repway workout-tracking interface with an example plan" fetchpriority="high" decoding="async"></a>
+</div><figcaption>App interfaces I've designed and built</figcaption></figure>
+</div></section>
+
+<section class="expertise" id="expertise" aria-labelledby="expertise-title" data-reveal>
+<h2 id="expertise-title">What I can help with</h2>
+<div class="capability-layout">
+<div class="capability-tabs" role="tablist" aria-label="Capabilities" aria-orientation="vertical">
+<button class="capability-tab" id="tab-data" type="button" role="tab" aria-selected="false" aria-controls="panel-data" tabindex="-1" data-tab="data">Data analysis <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></button>
+<button class="capability-tab" id="tab-design" type="button" role="tab" aria-selected="true" aria-controls="panel-design" tabindex="0" data-tab="design">UI/UX design <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></button>
+<button class="capability-tab" id="tab-build" type="button" role="tab" aria-selected="false" aria-controls="panel-build" tabindex="-1" data-tab="build">App development <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></button>
+</div>
+<div class="capability-panels">
+<article class="capability-panel" id="panel-data" role="tabpanel" aria-labelledby="tab-data" data-panel="data" tabindex="0">
+<h3>Data analysis</h3><p>I clean and explore data, compare models and explain where the results can be trusted.</p>
+<ol class="flow-line" aria-label="Analysis workflow"><li>Clean the data <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Test the model <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Explain the result</li></ol>
+<a class="text-link" href="research/wearable-sensor-analytics.html">See the analysis <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><p class="tool-line">Python · SQL · pandas · Power BI</p>
+</article>
+<article class="capability-panel" id="panel-design" role="tabpanel" aria-labelledby="tab-design" data-panel="design" data-active tabindex="0">
+<h3>UI/UX design</h3><p>I design app flows, layouts and reusable UI, then build and refine them.</p>
+<ol class="flow-line" aria-label="Paidly payment flow"><li>Find a bill <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Check details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Mark paid</li></ol>
+<a class="text-link" href="research/paidly-product-design.html">See the design decisions <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><p class="tool-line">Figma · Responsive UI · Interaction design</p>
+</article>
+<article class="capability-panel" id="panel-build" role="tabpanel" aria-labelledby="tab-build" data-panel="build" tabindex="0">
+<h3>App development</h3><p>I take interfaces through implementation and testing, including stored data, sign-in and platform builds.</p>
+<ol class="flow-line" aria-label="Development workflow"><li>Build <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Test <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Package</li></ol>
+<a class="text-link" href="research/personal-projects.html">Explore the apps <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><p class="tool-line">Swift · TypeScript · PostgreSQL</p>
+</article>
+</div></div></section>
+
+<section class="section" id="work" aria-labelledby="work-title">
+<div class="section-heading" data-reveal><div><h2 id="work-title">Selected work<span class="accent">.</span></h2><p>Design decisions and working code.</p></div></div>
+<div class="work-grid">
+<a class="project project-featured" href="research/paidly-product-design.html" aria-labelledby="paidly-title" data-reveal>
+<div class="project-media paidly-stage"><span class="product-screen"><img src="assets/paidly-home.webp" width="390" height="844" alt="Paidly Home screen with sample payment reminders" loading="lazy"></span><span class="product-screen"><img src="assets/paidly-calendar.webp" width="390" height="844" alt="Paidly Calendar screen showing a selected date" loading="lazy"></span></div>
+<p class="project-type">UI/UX &amp; app development</p><h3 id="paidly-title">Paidly</h3><p class="project-description">A bill-tracking app designed around clear actions and payment states.</p><span class="text-link">Design case study <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
+<a class="project project-compact" href="research/wearable-sensor-analytics.html" aria-labelledby="sensor-title" data-reveal>
+<div class="project-media signal-media"><img src="assets/sensor-preview.svg" alt="Illustrative muscle-activation signal traces" width="600" height="350" loading="lazy"></div>
+<p class="project-type">Data &amp; machine learning</p><h3 id="sensor-title">Wearable sensor analytics</h3><p class="project-description">Python pipelines for EMG and knee-angle data.</p><span class="text-link">Project details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
+<a class="project project-compact" href="research/afl-crowd-monitoring.html" aria-labelledby="crowd-title" data-reveal>
+<div class="project-media crowd-media"><img src="assets/crowd-preview.svg" alt="Illustrative crowd-density heatmap" width="600" height="350" loading="lazy"></div>
+<p class="project-type">Data visualisation</p><h3 id="crowd-title">AFL crowd monitoring</h3><p class="project-description">Density grids, validation and heatmap output.</p><span class="text-link">Project details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
+</div>
+<a class="recent-projects" href="research/personal-projects.html"><div><strong>More projects</strong><span class="app-names">Monday Transit · Repway · monday</span></div><span class="text-link">View app notes <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
 </section>
+
 <section class="section" id="experience" aria-labelledby="experience-title">
-<div class="context-grid"><div class="context-intro"><h2 class="context-title" id="experience-title">Experience<br>&amp; education</h2><p class="context-copy">My background is in data science and product design.</p><a class="text-link" href="assets/Chiranth_Gowda_Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé PDF <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a><a class="resume-word" href="assets/Chiranth_Gowda_Resume.docx" download>Word version</a></div>
+<h2 class="context-title" id="experience-title" data-reveal>Experience &amp; education</h2>
+<div class="context-grid"><div class="context-intro" data-reveal><p class="context-copy">My background is in data science and product design.</p><a class="text-link" href="assets/Chiranth_Gowda_Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé PDF <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><a class="resume-word" href="assets/Chiranth_Gowda_Resume.docx" download>Word version</a></div>
 <div class="timeline">
-<article class="timeline-row"><p class="timeline-date">2025 - 2026</p><div><h3>Data Analyst Intern</h3><p class="timeline-company">Redback Operations</p></div><p class="timeline-note">Sensor analysis and crowd-density heatmaps.</p></article>
-<article class="timeline-row"><p class="timeline-date">2023</p><div><h3>Product &amp; Visual Design</h3><p class="timeline-company">FreshOn.in</p></div><p class="timeline-note">Brand systems, digital campaigns &amp; retail design.</p></article>
-<article class="timeline-row"><p class="timeline-date">2024 - 2026</p><div><h3>Master of Data Science</h3><p class="timeline-company">Deakin University</p></div><p class="timeline-note"><strong>Distinction average.</strong></p></article>
+<article class="timeline-row" data-reveal><p class="timeline-date">2025 - 2026</p><div><h3>Data Analyst Intern</h3><p class="timeline-company">Redback Operations</p></div><p class="timeline-note">Sensor analysis and crowd-density heatmaps.</p></article>
+<article class="timeline-row" data-reveal><p class="timeline-date">2023</p><div><h3>Product Designer</h3><p class="timeline-company"><a class="text-link" href="research/freshon-product-campaign-system.html">FreshOn.in <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></p></div><p class="timeline-note">Digital, packaging and retail design.</p></article>
+<article class="timeline-row" data-reveal><p class="timeline-date">2024 - 2026</p><div><h3>Master of Data Science</h3><p class="timeline-company">Deakin University</p></div><p class="timeline-note">Distinction average.</p></article>
 </div></div>
-<div class="contact-band" id="contact" aria-labelledby="contact-title"><div><h2 id="contact-title">Get in touch</h2><p class="contact-lede">I'm looking for a data analyst or business intelligence role. Email is the best way to reach me.</p></div>
+<div class="contact-band" id="contact" aria-labelledby="contact-title" data-reveal><div><h2 id="contact-title">Get in touch.</h2><p class="contact-lede">Have a role or project in mind? I'd like to hear about it.</p></div>
 <div class="contact-actions"><a class="contact-email" href="mailto:chiranthgowdaofficial@gmail.com">chiranthgowdaofficial@gmail.com</a><a class="contact-phone" href="tel:+61435854135">+61 435 854 135</a><div class="contact-tools"><button type="button" class="copy-email">Copy email</button><a href="https://www.linkedin.com/in/chiranthgowdaofficial" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/chiranthgowdaxaus" target="_blank" rel="noopener noreferrer">GitHub</a></div><p class="copy-status" id="copy-status" role="status" aria-live="polite"></p></div></div>
 </section>
-</main><footer class="wrap site-footer"><span>© 2026 Chiru Gowda</span><a class="footer-person" href="about.html">The person off the clock</a><a class="text-link" href="#top">Back to top <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5m-6 6 6-6 6 6"/></svg></a></footer>
+</main>
+<footer class="wrap site-footer"><span>© 2026 Chiru Gowda</span><a class="footer-person" href="about.html">Off the clock</a><a class="text-link" href="#top">Back to top <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5m-6 6 6-6 6 6"/></svg></a></footer>
 </body></html>

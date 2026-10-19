@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Recent apps by Chiru Gowda: Paidly bill tracking, Monday Transit, Repway workout tracking and the monday local AI assistant. Features, tools and current status.">
-<meta name="theme-color" content="#f8f9fc">
+<meta name="theme-color" content="#151716">
 <title>Personal projects | Chiru Gowda</title>
 <meta property="og:title" content="Personal projects | Chiru Gowda">
 <meta property="og:description" content="Notes on Paidly, Monday Transit, Repway and monday, including what works and what still needs testing.">
@@ -12,14 +12,18 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="../assets/site.css">
-<script defer src="../assets/site.js"></script>
+<script src="../assets/theme-init.js?v=20261019"></script>
+<link rel="stylesheet" href="../assets/site.css?v=20261019">
+<script defer src="../assets/vendor/gsap-3.15.0.min.js"></script>
+<script defer src="../assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
+<script defer src="../assets/site.js?v=20261019"></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
+<div class="reading-progress" aria-hidden="true"></div>
 <header class="site-header"><div class="wrap header-inner">
 <a class="brand" href="../index.html" aria-label="Chiru Gowda home">Chiru Gowda<span>.</span></a>
-<nav class="nav" aria-label="Main navigation"><a class="nav-work" href="../index.html#work">Work</a><a href="../about.html">Off the clock</a><a class="button button-dark" href="../index.html#contact">Let's talk</a></nav>
+<nav class="nav" aria-label="Main navigation"><a class="nav-work" href="../index.html#work">Work</a><a href="../about.html">Off the clock</a><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg></button><a class="button button-dark" href="../index.html#contact">Contact</a></nav>
 </div></header>
 <main class="wrap case-main" id="main">
 <p class="breadcrumb"><a href="../index.html#work">Selected work</a> / Personal projects</p>
@@ -30,6 +34,7 @@
 <p class="app-status">Paidly · 2026</p><h2>Bill tracking &amp; splitting</h2>
 <p>Track recurring bills, record payments and split shared costs equally or by custom amounts. PostgreSQL access rules keep personal records private and limit shared records to group members.</p>
 <p>Revision checks reject stale edits. Marking a bill paid creates its next recurrence once, while keeping the payment history.</p>
+<p><a class="text-link" href="paidly-product-design.html">UI/UX case study: flows, navigation and payment states</a></p>
 <p class="tool-line">TypeScript · React Native · Expo · Supabase · PostgreSQL</p>
 <p class="app-limit">iOS build uploaded for internal TestFlight testing. Two-account split syncing and physical-device alerts still need testing. The app records balances; it does not transfer money.</p>
 </article>
