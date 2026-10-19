@@ -35,46 +35,75 @@ document.querySelectorAll(".copy-email").forEach(button => {
   });
 });
 
-// Native, keyboard-accessible tabs. Motion is an enhancement, not a dependency.
-const tabList = document.querySelector(".capability-tabs");
-if (tabList) {
-  const tabs = [...tabList.querySelectorAll('[role="tab"]')];
-  const panels = [...document.querySelectorAll('[role="tabpanel"]')];
-  const activateTab = (tab, animate = true) => {
-    tabs.forEach(item => {
-      const selected = item === tab;
-      item.setAttribute("aria-selected", String(selected));
-      item.tabIndex = selected ? 0 : -1;
+// A local-only interface concept. These sample records never reach a payment service.
+document.querySelectorAll("[data-app-demo]").forEach(demo => {
+  const rows = [...demo.querySelectorAll("[data-demo-bill]")];
+  const filters = [...demo.querySelectorAll("[data-demo-filter]")];
+  const paid = new Set();
+  const total = demo.querySelector("[data-demo-total]");
+  const count = demo.querySelector("[data-demo-count]");
+  const heading = demo.querySelector("[data-demo-heading]");
+  const list = demo.querySelector(".demo-bills");
+  const empty = demo.querySelector("[data-demo-empty]");
+  const status = demo.querySelector("[data-demo-status]");
+  let activeFilter = "upcoming";
+
+  const render = () => {
+    filters.forEach(button => {
+      button.disabled = false;
+      button.setAttribute("aria-pressed", String(button.dataset.demoFilter === activeFilter));
     });
-    panels.forEach(panel => {
-      const selected = panel.id === tab.getAttribute("aria-controls");
-      panel.hidden = !selected;
-      panel.toggleAttribute("data-active", selected);
-      if (selected && animate && !motionPreference.matches && window.gsap) {
-        gsap.fromTo(panel, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .3, ease: "power2.out", overwrite: true, clearProps: "transform,opacity" });
-      }
+    const visible = rows.filter(row => paid.has(row.dataset.demoBill) === (activeFilter === "paid"));
+    rows.forEach(row => {
+      const isPaid = paid.has(row.dataset.demoBill);
+      row.hidden = !visible.includes(row);
+      const button = row.querySelector("[data-mark-paid]");
+      button.disabled = isPaid;
+      button.textContent = isPaid ? "Paid" : "Mark paid";
+      button.setAttribute("aria-label", isPaid
+        ? row.dataset.name + " paid in the demo"
+        : "Mark " + row.dataset.name + " as paid in the demo");
     });
+    const sum = visible.reduce((value, row) => value + Number(row.dataset.amount), 0);
+    total.textContent = "A$" + sum;
+    heading.textContent = activeFilter === "paid" ? "Recorded payments" : "Your next payments";
+    count.textContent = visible.length + (visible.length === 1 ? " bill " : " bills ")
+      + (activeFilter === "paid" ? "recorded" : "upcoming");
+    list.setAttribute("aria-label", activeFilter === "paid" ? "Paid sample bills" : "Upcoming sample bills");
+    list.hidden = visible.length === 0;
+    empty.hidden = visible.length !== 0;
+    empty.textContent = activeFilter === "paid"
+      ? "No sample payments recorded yet."
+      : "All caught up. No upcoming sample bills.";
   };
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => activateTab(tab));
-    tab.addEventListener("keydown", event => {
-      let nextIndex;
-      if (["ArrowDown", "ArrowRight"].includes(event.key)) nextIndex = (index + 1) % tabs.length;
-      if (["ArrowUp", "ArrowLeft"].includes(event.key)) nextIndex = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === "Home") nextIndex = 0;
-      if (event.key === "End") nextIndex = tabs.length - 1;
-      if (nextIndex === undefined) return;
-      event.preventDefault();
-      activateTab(tabs[nextIndex]);
-      tabs[nextIndex].focus();
+
+  rows.forEach(row => {
+    row.querySelector("[data-mark-paid]").addEventListener("click", () => {
+      if (paid.has(row.dataset.demoBill)) return;
+      paid.add(row.dataset.demoBill);
+      render();
+      status.textContent = row.dataset.name + " marked paid in this demo.";
+      const next = rows.find(item => !item.hidden && !paid.has(item.dataset.demoBill));
+      const focusTarget = next?.querySelector("[data-mark-paid]")
+        || filters.find(button => button.dataset.demoFilter === activeFilter);
+      focusTarget?.focus({ preventScroll: true });
     });
   });
-  activateTab(tabs.find(tab => tab.getAttribute("aria-selected") === "true") || tabs[0], false);
-  const narrowLayout = window.matchMedia("(max-width: 720px)");
-  const syncOrientation = () => tabList.setAttribute("aria-orientation", narrowLayout.matches ? "horizontal" : "vertical");
-  syncOrientation();
-  narrowLayout.addEventListener("change", syncOrientation);
-}
+  filters.forEach(button => button.addEventListener("click", () => {
+    activeFilter = button.dataset.demoFilter;
+    render();
+    status.textContent = "Local demo. No real payments.";
+  }));
+  const reset = demo.querySelector("[data-demo-reset]");
+  reset.disabled = false;
+  reset.addEventListener("click", () => {
+    paid.clear();
+    activeFilter = "upcoming";
+    render();
+    status.textContent = "Demo reset. No real payments.";
+  });
+  render();
+});
 
 if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
@@ -83,26 +112,15 @@ if (window.gsap && window.ScrollTrigger) {
     const hero = document.querySelector(".hero:not(.about-hero)");
     if (hero) {
       gsap.timeline({ defaults: { ease: "power3.out" } })
-        .from(".headline-line", { y: 28, opacity: 0, duration: .7, stagger: .12 })
-        .from(".hero-person, .hero-actions, .availability", { y: 14, opacity: 0, duration: .5, stagger: .08 }, .25)
-        .from(".device-scene", { y: 40, rotationX: 7, opacity: 0, duration: .9 }, .1);
-      gsap.to(".hero-showcase", {
-        y: -30, rotation: -2, ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: .7 }
-      });
+        .from(".headline-line", { y: 22, opacity: 0, duration: .65, stagger: .1 })
+        .from(".hero-intro, .hero-actions, .availability", { y: 12, opacity: 0, duration: .5, stagger: .07 }, .2)
+        .from(".hero-photo", { opacity: 0, duration: .7 }, .1);
     }
     const reveals = gsap.utils.toArray("[data-reveal], .about-hero, .case-hero, .case-summary article, .outcome-band, .interest-row, .app-note, .field-grid article");
-    // Avoid stacking entrance effects on nested elements.
     reveals.filter(element => !element.parentElement.closest("[data-reveal]")).forEach(element => {
       gsap.from(element, {
-        y: 20, opacity: 0, duration: .65, ease: "power2.out",
+        y: 18, opacity: 0, duration: .6, ease: "power2.out",
         scrollTrigger: { trigger: element, start: "top 94%", once: true }
-      });
-    });
-    gsap.utils.toArray(".paidly-stage").forEach(stage => {
-      gsap.fromTo(stage.querySelectorAll(".product-screen"), { y: 16 }, {
-        y: -12, ease: "none",
-        scrollTrigger: { trigger: stage, start: "top bottom", end: "bottom top", scrub: .6 }
       });
     });
     const progress = document.querySelector(".reading-progress");
@@ -111,24 +129,12 @@ if (window.gsap && window.ScrollTrigger) {
       scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: true }
     });
   });
-  media.add("(prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine)", () => {
-    const scene = document.querySelector(".device-scene");
-    const stage = document.querySelector(".hero-showcase");
-    if (!scene || !stage) return;
-    const rotateX = gsap.quickTo(scene, "rotationX", { duration: .55, ease: "power2.out" });
-    const rotateY = gsap.quickTo(scene, "rotationY", { duration: .55, ease: "power2.out" });
-    const move = event => {
-      const bounds = stage.getBoundingClientRect();
-      rotateY(((event.clientX - bounds.left) / bounds.width - .5) * 8);
-      rotateX(((event.clientY - bounds.top) / bounds.height - .5) * -6);
-    };
-    const reset = () => { rotateX(0); rotateY(0); };
-    stage.addEventListener("pointermove", move);
-    stage.addEventListener("pointerleave", reset);
-    return () => {
-      stage.removeEventListener("pointermove", move);
-      stage.removeEventListener("pointerleave", reset);
-    };
+  media.add("(prefers-reduced-motion: no-preference) and (min-width: 821px)", () => {
+    const photo = document.querySelector(".hero-photo img");
+    if (photo) gsap.to(photo, {
+      y: -16, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: .7 }
+    });
   });
   window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
   if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());

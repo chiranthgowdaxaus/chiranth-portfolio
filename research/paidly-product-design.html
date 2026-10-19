@@ -10,13 +10,13 @@
 <meta property="og:description" content="The flow, navigation and layout decisions behind a bill-tracking app I designed and built.">
 <meta property="og:type" content="website">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script src="../assets/theme-init.js?v=20261019"></script>
-<link rel="stylesheet" href="../assets/site.css?v=20261019">
+<link rel="preload" href="../assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script src="../assets/theme-init.js?v=20261019b"></script>
+<link rel="stylesheet" href="../assets/site.css?v=20261019b">
 <script defer src="../assets/vendor/gsap-3.15.0.min.js"></script>
 <script defer src="../assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
-<script defer src="../assets/site.js?v=20261019"></script>
+<script defer src="../assets/site.js?v=20261019b"></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -27,12 +27,24 @@
 </div></header>
 <main class="wrap case-main" id="main">
 <p class="breadcrumb"><a href="../index.html#work">Selected work</a> / Paidly</p>
-<section class="case-hero" aria-labelledby="case-title">
+<section class="case-hero case-hero--text" aria-labelledby="case-title">
 <div><h1 class="case-title" id="case-title">Paidly<span class="accent">Bills, made clearer.</span></h1>
 <p class="case-lede">I designed and built a bill-tracking app around three questions: what's due, when is it due, and has it been paid?</p>
 <dl class="case-meta"><div><dt>My role</dt><dd>Product design &amp; development</dd></div><div><dt>Context</dt><dd>Personal project</dd></div><div><dt>When</dt><dd>2026</dd></div></dl></div>
-<figure class="case-visual"><div class="paidly-stage"><span class="product-screen"><img src="../assets/paidly-home.webp" width="390" height="844" alt="Paidly Home showing sample bills and Mark paid actions"></span><span class="product-screen"><img src="../assets/paidly-calendar.webp" width="390" height="844" alt="Paidly Calendar with a selected date and its sample bills"></span></div></figure>
+
 </section>
+<figure class="case-demo" data-reveal><div class="app-demo" data-app-demo role="region" aria-label="Paidly interactive interface concept">
+<div class="demo-brand"><strong>Paidly</strong><span>Bill tracker</span></div>
+<p class="demo-heading" data-demo-heading>Your next payments</p>
+<div class="demo-overview"><div><p class="demo-total" data-demo-total>A$80</p><p class="demo-count" data-demo-count>2 bills upcoming</p></div>
+<div class="demo-tabs" role="group" aria-label="Filter sample bills"><button class="demo-tab" type="button" data-demo-filter="upcoming" aria-pressed="true" disabled>Upcoming</button><button class="demo-tab" type="button" data-demo-filter="paid" aria-pressed="false" disabled>Paid</button></div></div>
+<ul class="demo-bills" aria-label="Sample bills">
+<li class="bill-row" data-demo-bill="internet" data-amount="65" data-name="Internet"><span class="bill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8a14 14 0 0 1 18 0M6 11a9 9 0 0 1 12 0m-9 3a4.5 4.5 0 0 1 6 0"/><circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/></svg></span><div><p class="bill-name">Internet</p><p class="bill-date">22 Oct</p></div><span class="bill-amount">A$65</span><button class="bill-action" type="button" data-mark-paid aria-label="Mark Internet as paid in the demo" disabled>Mark paid</button></li>
+<li class="bill-row" data-demo-bill="subscription" data-amount="15" data-name="Subscription"><span class="bill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18m-14 5h4"/></svg></span><div><p class="bill-name">Subscription</p><p class="bill-date">22 Oct</p></div><span class="bill-amount">A$15</span><button class="bill-action" type="button" data-mark-paid aria-label="Mark Subscription as paid in the demo" disabled>Mark paid</button></li>
+</ul><p class="demo-empty" data-demo-empty hidden>No bills here yet.</p>
+<div class="demo-footer"><p class="demo-status" role="status" aria-live="polite" data-demo-status>Local demo. No real payments.</p><button class="demo-reset" type="button" data-demo-reset disabled>Reset demo</button></div>
+<noscript><p class="demo-status">Enable JavaScript to try the interface.</p></noscript>
+</div><figcaption class="demo-caption">Interactive interface concept. Sample data. The build notes below describe the implemented app.</figcaption></figure>
 <section class="case-summary" aria-label="Project overview"><article><h2>The task</h2><p>Keep recurring bills, payment history and shared costs in one place without making everyday actions hard to find.</p></article><article><h2>What I designed</h2><p>Four-tab navigation, bill cards, a due-date calendar and distinct states for bills and shared balances.</p></article><article><h2>What I built</h2><p>The interface, recurring-bill logic, sign-in and stored records. An iOS build is uploaded for internal TestFlight testing.</p></article></section>
 <section class="design-flow" aria-labelledby="flow-title" data-reveal><h2 id="flow-title">One everyday flow</h2>
 <ol class="flow-line" aria-label="Record a bill payment"><li>Find a bill <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Check details <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></li><li>Mark paid</li></ol>
@@ -43,10 +55,10 @@
 <article><h2>Room for the action</h2><p>Bill cards reserve space for the payment button. I adjusted long titles, dates and spacing after checking narrow layouts at 320 and 390 pixels.</p></article>
 <article><h2>Stable calendar layout</h2><p>Bill markers sit inside each date cell without moving the date number. Selecting a date brings its bills below the calendar.</p></article>
 </section>
-<section class="case-screens" aria-label="Actual Paidly screens using sample data" data-reveal>
+<details class="technical-notes"><summary><span><strong>Earlier build screenshots</strong><small>The implemented interface, shown with sample data</small></span></summary><section class="case-screens" aria-label="Actual Paidly screens using sample data" data-reveal>
 <figure><img src="../assets/paidly-home.webp" width="390" height="844" alt="Paidly Home with a 65-dollar sample internet bill and a 15-dollar sample subscription" loading="lazy"><figcaption>Home: due dates and payment actions. Sample data.</figcaption></figure>
 <figure><img src="../assets/paidly-calendar.webp" width="390" height="844" alt="Paidly Calendar with 22 October selected and sample bills listed underneath" loading="lazy"><figcaption>Calendar: bills grouped by due date. Sample data.</figcaption></figure>
-</section>
+</section></details>
 <section class="case-summary" aria-label="Design implementation and limits">
 <article><h2>Separate payment states</h2><p>A bill being paid to a merchant is different from everyone settling a shared balance. Those states stay separate so one action does not imply both.</p></article>
 <article><h2>Design through to code</h2><p>I worked on the flows, reusable UI and implementation together. Layout checks caught a header covering content and cramped bill-card actions, which I corrected.</p></article>
