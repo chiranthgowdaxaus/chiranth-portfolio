@@ -4,7 +4,7 @@
 <rect width="900" height="500" fill="#f4f3ef"/><rect width="900" height="500" fill="url(#grid)"/>
 <g fill="none" stroke="#828b7c" opacity=".38"><path d="M46 66V46H66M834 46H854V66M46 434V454H66M834 454H854V434M438 46H462m-12-12v24M438 454H462m-12-12v24"/></g>
 <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-<path d="M289 164c20-57 84-97 161-97 83 0 149 45 166 105m-15-8 15 8 7-16M610 337c-21 57-84 96-160 96-81 0-148-44-166-104m15 9-15-9-7 16" stroke="#b44720" stroke-width="1.8"/>
+<path d="M289 164c20-57 84-97 161-97 83 0 149 45 166 105m-15-8 15 8 7-16M610 337c-21 57-84 96-160 96-81 0-148-44-166-104m15 9-15-9-7 16" stroke="#2d607e" stroke-width="1.8"/>
 <circle cx="450" cy="250" r="156" stroke="#828b7c" stroke-dasharray="3 9" opacity=".35"/>
 <g transform="rotate(-23 450 250)"><rect x="350" y="235" width="200" height="30" rx="4" fill="url(#hatch)" stroke="#263025" stroke-width="2"/>
 <path d="M371 239v22m19-22v22m19-22v22m19-22v22m19-22v22m19-22v22m19-22v22m19-22v22m19-22v22" stroke="#828b7c"/>
@@ -13,4 +13,4 @@
 <path d="M270 238h16m-16 24h16m328-24h16m-16 24h16" stroke="#263025" stroke-width="2"/>
 <path d="M286 376h328m-328-8v16m328-16v16m-316-12-12 4 12 4m304-8 12 4-12 4" stroke="#828b7c" opacity=".65"/></g>
 <path d="M696 129h25m-25 13h37m-37 13h25M169 345h25m-25 13h37m-37 13h25" stroke="#828b7c" stroke-width="1.2" opacity=".65"/>
-<path d="m674 134 5 5 8-10m-535 221 5 5 8-10" stroke="#b44720" stroke-width="2"/></g></svg>
+<path d="m674 134 5 5 8-10m-535 221 5 5 8-10" stroke="#2d607e" stroke-width="2"/></g></svg>

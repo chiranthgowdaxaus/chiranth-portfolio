@@ -12,11 +12,11 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script src="../assets/theme-init.js?v=20261020e"></script>
-<link rel="stylesheet" href="../assets/site.css?v=20261020e">
+<script src="../assets/theme-init.js?v=20261020g"></script>
+<link rel="stylesheet" href="../assets/site.css?v=20261020g">
 <script defer src="../assets/vendor/gsap-3.15.0.min.js"></script>
 <script defer src="../assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
-<script defer src="../assets/site.js?v=20261020e"></script>
+<script defer src="../assets/site.js?v=20261020g"></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -30,7 +30,7 @@
 <p class="breadcrumb"><a href="../index.html#work">Selected work</a> &nbsp; / &nbsp; 01</p>
 <section class="case-hero" aria-labelledby="case-title"><div><h1 class="case-title" id="case-title">Wearable sensor<span>analytics</span></h1><p class="case-lede">I built Python pipelines to analyse muscle activity and knee-angle recordings.</p>
 <dl class="case-meta"><div><dt>Role</dt><dd>Data &amp; ML contributor</dd></div><div><dt>Context</dt><dd>Redback Operations</dd></div><div><dt>When</dt><dd>2025-2026</dd></div></dl></div>
-<figure class="case-visual case-visual--blueprint"><img src="../assets/project-covers/sensor-blueprint.svg?v=20261020e" alt="Illustrative muscle-activation signal traces" width="900" height="500"></figure></section>
+<figure class="case-visual case-visual--blueprint"><img src="../assets/project-covers/sensor-blueprint.svg?v=20261020g" alt="Illustrative muscle-activation signal traces" width="900" height="500"></figure></section>
 <section class="outcome-band" aria-label="Project outcomes"><div class="outcome-grid"><div class="outcome"><strong>4</strong><span>muscle channels</span></div><div class="outcome"><strong>0.948</strong><span>average R²</span></div><div class="outcome"><strong>2.86</strong><span>average MAE</span></div></div><p class="outcome-note">Prepared dataset results. New-athlete performance requires further validation.</p></section>
 <section class="case-summary" aria-label="Project summary"><article><h2>The task</h2><p>Use EMG and knee-angle data to measure muscle activation during each repetition.</p></article><article><h2>My contribution</h2><p>Cleaned signals, detected reps, extracted features and compared model baselines.</p></article><article><h2>The result</h2><p>Per-repetition summaries and a repeatable pipeline, with the test results and limits documented below.</p></article></section>
 <details class="technical-notes"><summary><span><strong>Technical notes &amp; decisions</strong><small>Preprocessing, validation and model results</small></span></summary><div class="notes-content"><h3>From files to features</h3><p>Built flexible loaders for inconsistent delimiters, headers and decimal formats. Cleaned and filtered EMG, then used the knee-goniometer channel to detect repetition boundaries. Computed activation metrics per repetition and extracted modelling features in <strong>200 ms windows with a 50 ms hop</strong>.</p>

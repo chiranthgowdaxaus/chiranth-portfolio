@@ -29,3 +29,8 @@ pnpm-debug.log*
 # Editor/workspace noise
 .vscode/
 .idea/
+
+# Local design evidence and lossless generation sources
+design-qa.md
+/assets/blueprint-hero-blue.png
+/assets/blueprint-sections-blue.png
