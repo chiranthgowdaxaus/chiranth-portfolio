@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Python pipelines for EMG and knee-angle data, feature extraction and Random Forest evaluation at Redback Operations.">
-<meta name="theme-color" content="#151716">
+<meta name="theme-color" content="#f4f3ef">
 <title>Wearable sensor analytics | Chiru Gowda</title>
 <meta property="og:title" content="Wearable sensor analytics | Chiru Gowda">
 <meta property="og:description" content="Python pipelines for EMG and knee-angle data, feature extraction and model evaluation.">
@@ -12,11 +12,11 @@
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="../assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script src="../assets/theme-init.js?v=20261019b"></script>
-<link rel="stylesheet" href="../assets/site.css?v=20261020c">
+<script src="../assets/theme-init.js?v=20261020d"></script>
+<link rel="stylesheet" href="../assets/site.css?v=20261020d">
 <script defer src="../assets/vendor/gsap-3.15.0.min.js"></script>
 <script defer src="../assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
-<script defer src="../assets/site.js?v=20261020a"></script>
+<script defer src="../assets/site.js?v=20261020d"></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -24,13 +24,13 @@
 <header class="site-header"><div class="wrap header-inner">
 <a class="brand" href="../index.html" aria-label="Chiru Gowda home">Chiru Gowda<span>.</span></a>
 <nav class="nav" aria-label="Main navigation">
-<a class="nav-work" href="../index.html#work">Work</a><a href="../about.html">Off the clock</a><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg></button><a class="button button-dark" href="../index.html#contact">Contact</a>
+<a class="nav-work" href="../index.html#work">Work</a><a href="../about.html">Off the clock</a><a class="button button-dark" href="../index.html#contact">Contact</a>
 </nav></div></header>
 <main class="wrap case-main" id="main">
 <p class="breadcrumb"><a href="../index.html#work">Selected work</a> &nbsp; / &nbsp; 01</p>
 <section class="case-hero" aria-labelledby="case-title"><div><h1 class="case-title" id="case-title">Wearable sensor<span>analytics</span></h1><p class="case-lede">I built Python pipelines to analyse muscle activity and knee-angle recordings.</p>
 <dl class="case-meta"><div><dt>Role</dt><dd>Data &amp; ML contributor</dd></div><div><dt>Context</dt><dd>Redback Operations</dd></div><div><dt>When</dt><dd>2025-2026</dd></div></dl></div>
-<figure class="case-visual"><img src="../assets/sensor-preview.svg" alt="Illustrative muscle-activation signal traces" width="600" height="350"></figure></section>
+<figure class="case-visual"><img src="../assets/project-covers/sensor-blueprint.svg?v=20261020d" alt="Illustrative muscle-activation signal traces" width="900" height="500"></figure></section>
 <section class="outcome-band" aria-label="Project outcomes"><div class="outcome-grid"><div class="outcome"><strong>4</strong><span>muscle channels</span></div><div class="outcome"><strong>0.948</strong><span>average R²</span></div><div class="outcome"><strong>2.86</strong><span>average MAE</span></div></div><p class="outcome-note">Prepared dataset results. New-athlete performance requires further validation.</p></section>
 <section class="case-summary" aria-label="Project summary"><article><h2>The task</h2><p>Use EMG and knee-angle data to measure muscle activation during each repetition.</p></article><article><h2>My contribution</h2><p>Cleaned signals, detected reps, extracted features and compared model baselines.</p></article><article><h2>The result</h2><p>Per-repetition summaries and a repeatable pipeline, with the test results and limits documented below.</p></article></section>
 <details class="technical-notes"><summary><span><strong>Technical notes &amp; decisions</strong><small>Preprocessing, validation and model results</small></span></summary><div class="notes-content"><h3>From files to features</h3><p>Built flexible loaders for inconsistent delimiters, headers and decimal formats. Cleaned and filtered EMG, then used the knee-goniometer channel to detect repetition boundaries. Computed activation metrics per repetition and extracted modelling features in <strong>200 ms windows with a 50 ms hop</strong>.</p>

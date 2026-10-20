@@ -1,7 +1,4 @@
 "use strict";
-// Apply the saved appearance before the first paint. Content does not depend on it.
+// One light appearance, independent of device or saved preferences.
 document.documentElement.classList.add("js");
-try {
-  const savedTheme = localStorage.getItem("portfolio-theme");
-  if (savedTheme === "light" || savedTheme === "dark") document.documentElement.dataset.theme = savedTheme;
-} catch { /* Storage can be unavailable in private browsing. */ }
+document.documentElement.dataset.theme = "light";

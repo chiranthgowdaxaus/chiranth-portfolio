@@ -1,21 +1,5 @@
 "use strict";
 
-const root = document.documentElement;
-const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-const themeButtons = document.querySelectorAll(".theme-toggle");
-const syncTheme = () => {
-  const isLight = root.dataset.theme === "light";
-  themeButtons.forEach(button => button.setAttribute("aria-label", `Switch to ${isLight ? "dark" : "light"} theme`));
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  if (themeMeta) themeMeta.content = isLight ? "#f4f3ef" : "#151716";
-};
-syncTheme();
-themeButtons.forEach(button => button.addEventListener("click", () => {
-  root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
-  try { localStorage.setItem("portfolio-theme", root.dataset.theme); } catch { /* Optional preference. */ }
-  syncTheme();
-}));
-
 document.querySelectorAll(".copy-email").forEach(button => {
   let resetTimer;
   button.addEventListener("click", async () => {
