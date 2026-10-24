@@ -1,5 +1,72 @@
 "use strict";
 
+document.querySelectorAll(".nav-toggle").forEach(toggle => {
+  const nav = toggle.closest(".nav");
+  const close = () => {
+    nav.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open navigation");
+  };
+  toggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+  });
+  nav.querySelectorAll("a").forEach(link => link.addEventListener("click", close));
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && nav.classList.contains("is-open")) {
+      close();
+      toggle.focus();
+    }
+  });
+  document.addEventListener("click", event => {
+    if (!nav.contains(event.target)) close();
+  });
+});
+
+const projectGrid = document.querySelector(".work-grid");
+const projectFilters = [...document.querySelectorAll("[data-project-filter]")];
+if (projectGrid && projectFilters.length) {
+  const cards = [...projectGrid.querySelectorAll("[data-project-categories]")];
+  const status = document.querySelector("[data-project-status]");
+  projectFilters.forEach(button => {
+    button.disabled = false;
+    button.addEventListener("click", () => {
+      const filter = button.dataset.projectFilter;
+      projectGrid.dataset.filter = filter;
+      projectFilters.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+      const visible = cards.filter(card => {
+        card.hidden = filter !== "all" && !card.dataset.projectCategories.split(" ").includes(filter);
+        return !card.hidden;
+      });
+      if (status) status.textContent = `${visible.length} projects${filter === "all" ? "" : ` in ${filter}`}`;
+      if (window.gsap) {
+        gsap.killTweensOf(cards);
+        gsap.set(visible, { clearProps: "opacity,transform" });
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          gsap.fromTo(visible, { opacity: .35, y: 10 }, { opacity: 1, y: 0, duration: .3, stagger: .04, clearProps: "opacity,transform" });
+        }
+      }
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    });
+  });
+}
+
+if ("IntersectionObserver" in window) {
+  const locations = [["work", ".nav-work"], ["expertise", ".nav-expertise"]];
+  const sections = locations.map(([id, selector]) => [document.getElementById(id), document.querySelector(selector)]).filter(([section, link]) => section && link);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const pair = sections.find(([section]) => section === entry.target);
+      if (pair) {
+        if (entry.isIntersecting) pair[1].setAttribute("aria-current", "location");
+        else pair[1].removeAttribute("aria-current");
+      }
+    });
+  }, { rootMargin: "-15% 0px -55% 0px", threshold: 0 });
+  sections.forEach(([section]) => observer.observe(section));
+}
+
 document.querySelectorAll(".copy-email").forEach(button => {
   let resetTimer;
   button.addEventListener("click", async () => {
@@ -28,7 +95,7 @@ if (window.gsap && window.ScrollTrigger) {
       gsap.timeline({ defaults: { ease: "power3.out" } })
         .from(".headline-line", { y: 22, opacity: 0, duration: .65, stagger: .1 })
         .from(".hero-intro, .hero-actions, .availability", { y: 12, opacity: 0, duration: .5, stagger: .07 }, .2)
-        .from(".hero-photo", { opacity: 0, duration: .7 }, .1);
+        .from(".hero-product", { opacity: 0, y: 12, duration: .8 }, .1);
     }
     const reveals = gsap.utils.toArray("[data-reveal], .about-hero, .case-hero, .case-summary article, .outcome-band, .interest-row, .app-note, .field-grid article");
     reveals.filter(element => !element.parentElement.closest("[data-reveal]")).forEach(element => {
@@ -41,13 +108,6 @@ if (window.gsap && window.ScrollTrigger) {
     if (progress) gsap.to(progress, {
       scaleX: 1, ease: "none",
       scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: true }
-    });
-  });
-  media.add("(prefers-reduced-motion: no-preference) and (min-width: 821px)", () => {
-    const photo = document.querySelector(".hero-photo img");
-    if (photo) gsap.to(photo, {
-      y: -16, ease: "none",
-      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: .7 }
     });
   });
   window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
