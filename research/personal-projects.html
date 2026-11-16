@@ -1,80 +1,84 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Recent apps by Chiru Gowda: Paidly bill tracking, Monday Transit, Repway workout tracking and the monday local AI assistant. Features, tools and current status.">
-<meta name="theme-color" content="#0b0d0b">
-<title>Personal projects | Chiru Gowda</title>
-<meta property="og:title" content="Personal projects | Chiru Gowda">
-<meta property="og:description" content="Notes on Paidly, Monday Transit, Repway and monday, including what works and what still needs testing.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>More projects | Chiru Gowda</title>
+<meta name="description" content="Repway workout tracking, Monday Transit and the monday local AI assistant: what each app does, the tools used and what still needs testing.">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="More projects | Chiru Gowda">
+<meta property="og:description" content="Repway workout tracking, Monday Transit and the monday local AI assistant: what each app does, the tools used and what still needs testing.">
 <meta property="og:type" content="website">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="../assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script src="../assets/theme-init.js?v=20261024b"></script>
-<link rel="stylesheet" href="../assets/site.css?v=20261024b">
-<script defer src="../assets/vendor/gsap-3.15.0.min.js"></script>
-<script defer src="../assets/vendor/ScrollTrigger-3.15.0.min.js"></script>
-<script defer src="../assets/site.js?v=20261024b"></script>
-<script defer src="../assets/app-previews.js?v=20261024b"></script>
+<link rel="stylesheet" href="../assets/site.css?v=20261116">
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../assets/site.js?v=20261116"></script>
+<script defer src="../assets/app-previews.js?v=20261116"></script>
 </head>
-<body id="top">
+<body>
 <a class="skip-link" href="#main">Skip to content</a>
-<div class="reading-progress" aria-hidden="true"></div>
-<header class="site-header"><div class="wrap header-inner">
-<a class="brand" href="../index.html" aria-label="Chiru Gowda home">Chiru Gowda<span>.</span></a>
-<nav class="nav" aria-label="Main navigation"><button type="button" class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links"><img class="ui-icon" src="../assets/icons/phosphor/list.svg" alt="" width="22" height="22"></button><div class="nav-links" id="nav-links"><a class="nav-work" href="../index.html#work">Projects</a><a href="../about.html">Off the clock</a></div><a class="button button-dark" href="../index.html#contact">Contact</a></nav>
+<div class="ambient" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<header class="site-header"><div class="nav-bar glass">
+<a class="brand" href="../index.html" aria-label="Chiru Gowda, home">Chiru Gowda<span>.</span></a>
+<nav class="nav-links" id="nav-links" aria-label="Main"><a href="../index.html#work">Projects</a><a href="../index.html#skills">Skills</a><a href="../about.html">Off the clock</a></nav>
+<a class="button button-small" href="../index.html#contact">Contact</a>
+<button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
 </div></header>
-<main class="wrap case-main" id="main">
-<p class="breadcrumb"><a href="../index.html#work">Projects</a> / Personal projects</p>
-<h1 class="case-title">Recent apps</h1>
-<p class="case-lede">A few things I've been building alongside my data work.</p>
-<div class="app-grid">
-<article class="app-note" id="paidly">
-<p class="app-status">Paidly · 2026</p><h2>Bill tracking &amp; splitting</h2>
-<p>Track recurring bills, record payments and split shared costs equally or by custom amounts. PostgreSQL access rules keep personal records private and limit shared records to group members.</p>
-<p>Revision checks reject stale edits. Marking a bill paid creates its next recurrence once, while keeping the payment history.</p>
-<p><a class="text-link" href="paidly-product-design.html">UI/UX case study: flows, navigation and payment states</a></p>
-<p class="tool-line">TypeScript · React Native · Expo · Supabase · PostgreSQL</p>
-<p class="app-limit">iOS build uploaded for internal TestFlight testing. Two-account split syncing and physical-device alerts still need testing. The app records balances; it does not transfer money.</p>
-</article>
-<article class="app-note" id="transit">
-<p class="app-status">Monday Transit · 2026</p><h2>Victorian public transport</h2>
-<p>A Mac and iPhone app with nearby PTV departures, transport filters and downloaded maps covering Victoria. Reported vehicle positions and timetable estimates have separate labels.</p>
-<p>MapLibre and Three.js use the same map camera for vehicle models. Missing position data stays missing rather than being filled with invented movement.</p>
-<p class="tool-line">Swift · SwiftUI · REST APIs · MapLibre · PMTiles · Three.js</p>
-<p class="app-limit">Development builds verified on Mac and iPhone simulator. Live data samples nearby services, not the whole fleet. Exact track-following and physical iPhone performance remain open.</p>
-</article>
-<article class="app-note" id="repway">
-<p class="app-status">Repway · 2026</p><h2>Workout &amp; meal tracking</h2>
+<main id="main" class="wrap">
+<p class="breadcrumb"><a href="../index.html#work">Projects</a> <span aria-hidden="true">/</span> <span aria-current="page">More projects</span></p>
+<section class="case-hero" aria-labelledby="case-title">
+<h1 id="case-title">More projects<span>in progress.</span></h1>
+<p class="case-lede">Smaller apps I've been building alongside my data and design work.</p>
+</section>
+<div class="app-list">
+
+<article class="app-entry glass" id="repway" data-reveal>
+<div>
+<p class="eyebrow">Repway · 2026</p><h2>Workout &amp; meal tracking</h2>
 <p>Create workout plans, log weights and reps, keep meal plans and record gym sessions. Saved sessions survive reopening the app, and email sign-in uses secure native storage.</p>
-<p class="tool-line">TypeScript · React · Capacitor · Supabase</p>
-<p class="app-limit">Android test build created and iOS build uploaded for TestFlight. Phone testing, health syncing and account-link setup still need verification.</p>
-<section class="native-preview workout-preview" data-workout-preview aria-label="Repway interactive workout preview">
-<div class="preview-heading"><span class="preview-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m7 5 12 12M4 8l4-4m8 16 4-4M2 7l5-5m10 20 5-5M5 10l5-5m4 14 5-5"/></svg></span><div><h3>Repway</h3><p>Workout planner</p></div></div>
+<dl class="spec"><div><dt>Platform</dt><dd>iPhone &amp; Android</dd></div><div><dt>Built with</dt><dd>TypeScript, React, Capacitor, Supabase</dd></div><div><dt>Status</dt><dd><span class="state state--test">TestFlight &amp; Android test build</span></dd></div><div><dt>Still to check</dt><dd>Phone testing, health sync, account linking</dd></div></dl>
+</div>
+<section class="app-window glass" data-workout-preview aria-label="Repway interactive workout preview">
+<div class="app-window-head"><span class="app-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11"/></svg></span><div><h3>Repway</h3><p>Workout planner</p></div></div>
 <p class="workout-greeting">A little stronger.<br>Every session.</p>
-<div class="workout-session"><p class="workout-eyebrow">Today's workout</p><h3>Push + Abs</h3><p>Chest, shoulders &amp; triceps</p><p class="workout-detail">3 sample exercises · Go at your pace</p><button type="button" class="workout-start" data-start-workout disabled>Start workout <span aria-hidden="true">↗</span></button></div>
+<div class="workout-session"><p class="workout-eyebrow">Today's workout</p><h4>Push + Abs</h4><p>Chest, shoulders &amp; triceps</p><p>3 sample exercises · Go at your pace</p><button type="button" class="workout-start" data-start-workout disabled>Start workout <span aria-hidden="true">↗</span></button></div>
 <fieldset class="workout-exercises" data-workout-exercises hidden><legend>Example session</legend>
 <label><input type="checkbox" data-exercise disabled><span><strong>Bench press</strong><small>3 sets · 8 reps</small></span></label>
 <label><input type="checkbox" data-exercise disabled><span><strong>Shoulder press</strong><small>3 sets · 10 reps</small></span></label>
 <label><input type="checkbox" data-exercise disabled><span><strong>Plank</strong><small>3 sets · 45 seconds</small></span></label>
 <div class="workout-progress"><span data-workout-count>0 of 3 complete</span><progress max="3" value="0" data-workout-progress aria-label="Completed sample exercises"></progress></div>
-<button type="button" class="workout-finish" data-finish-workout disabled>Finish preview session</button>
+<button type="button" class="workout-finish" data-finish-workout disabled>Finish session</button>
 </fieldset>
-<div class="preview-footer"><p role="status" data-workout-status>Local preview. Sample workout only.</p><button class="preview-reset" type="button" data-workout-reset disabled>Reset preview</button></div>
-<p class="preview-note">Built as native web elements. This preview does not save or sync a real workout.</p>
-<noscript><p class="preview-note">Enable JavaScript to try the controls.</p></noscript>
+<div class="preview-footer"><p role="status" data-workout-status>Sample workout only.</p><button class="preview-reset" type="button" data-workout-reset disabled>Reset</button></div>
+<p class="preview-note">A web preview. It doesn't save or sync a real workout.</p>
+<noscript><p class="preview-note">Turn on JavaScript to try the controls.</p></noscript>
 </section>
 </article>
-<article class="app-note" id="monday">
-<p class="app-status">monday · In development</p><h2>Local AI assistant</h2>
-<p>An assistant built around local language models, voice interaction and structured tool calls. One debugging task involved fixing a chat template that dropped tool calls.</p>
-<p class="tool-line">Swift · SwiftUI · Local language models · Tool calling</p>
-<p class="app-limit">A personal development project, not a released product. Monday Transit is a separate app that shares a transit service interface.</p>
-</article>
+
+<article class="app-entry app-entry--single glass" id="transit" data-reveal>
+<div>
+<p class="eyebrow">Monday Transit · 2026</p><h2>Victorian public transport</h2>
+<p>A Mac and iPhone app with nearby PTV departures, transport filters and downloaded maps covering Victoria. Reported vehicle positions and timetable estimates are labelled separately.</p>
+<p>MapLibre and Three.js share one map camera for vehicle models. Missing position data stays missing instead of being filled with invented movement.</p>
+<dl class="spec"><div><dt>Platform</dt><dd>Mac &amp; iPhone</dd></div><div><dt>Built with</dt><dd>Swift, SwiftUI, REST APIs, MapLibre, PMTiles, Three.js</dd></div><div><dt>Status</dt><dd><span class="state">In development · checked on Mac and simulator</span></dd></div><div><dt>Still to check</dt><dd>Exact track-following, iPhone performance</dd></div></dl>
 </div>
-<nav class="case-next" aria-label="More projects"><a class="text-link" href="../index.html#work">Back to projects</a><a class="text-link" href="../assets/Chiranth_Gowda_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume PDF <img class="arrow ui-icon" src="../assets/icons/phosphor/arrow-right.svg" alt="" width="20" height="20"></a></nav>
+</article>
+
+<article class="app-entry app-entry--single glass" id="monday" data-reveal>
+<div>
+<p class="eyebrow">monday · In development</p><h2>Local AI assistant</h2>
+<p>An assistant built around local language models, voice and structured tool calls. One debugging task was fixing a chat template that dropped tool calls.</p>
+<dl class="spec"><div><dt>Built with</dt><dd>Swift, SwiftUI, local language models</dd></div><div><dt>Status</dt><dd><span class="state">In development · not released</span></dd></div></dl>
+</div>
+</article>
+
+</div>
+<nav class="case-next" aria-label="More projects"><a class="glass is-lit" href="../index.html#work"><small>Back</small><span>All projects</span></a><a class="glass is-lit" href="nightfall.html"><small>Next project</small><span>Nightfall →</span></a></nav>
 </main>
-<footer class="wrap site-footer"><span>© 2026 Chiru Gowda</span><a class="footer-person" href="../about.html">The person off the clock</a><a class="text-link" href="#top">Back to top <img class="arrow ui-icon" src="../assets/icons/phosphor/arrow-up.svg" alt="" width="20" height="20"></a></footer>
-</body></html>
+<footer class="wrap site-footer">
+<span>© 2026 Chiru Gowda · Melbourne</span>
+<nav aria-label="Footer"><a href="../index.html#work">Projects</a><a href="../about.html">Off the clock</a><a href="mailto:chiranthgowdaofficial@gmail.com">Email</a><a href="https://www.linkedin.com/in/chiranthgowdaofficial" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/chiranthgowdaxaus" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+</footer>
+</body>
+</html>
