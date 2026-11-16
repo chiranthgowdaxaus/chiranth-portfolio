@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nightfall · iPhone game design &amp; development | Chiru Gowda</title>
+<meta name="description" content="Nightfall is a native iPhone game of real-world hide-and-seek. Game and interface design, SwiftUI development and a privacy-first Supabase backend by Chiru Gowda.">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Nightfall · iPhone game design &amp; development | Chiru Gowda">
+<meta property="og:description" content="Nightfall is a native iPhone game of real-world hide-and-seek. Game and interface design, SwiftUI development and a privacy-first Supabase backend by Chiru Gowda.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css?v=20261116">
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../assets/site.js?v=20261116"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ambient" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<header class="site-header"><div class="nav-bar glass">
+<a class="brand" href="../index.html" aria-label="Chiru Gowda, home">Chiru Gowda<span>.</span></a>
+<nav class="nav-links" id="nav-links" aria-label="Main"><a href="../index.html#work">Projects</a><a href="../index.html#skills">Skills</a><a href="../about.html">Off the clock</a></nav>
+<a class="button button-small" href="../index.html#contact">Contact</a>
+<button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</div></header>
+<main id="main" class="wrap">
+<p class="breadcrumb"><a href="../index.html#work">Projects</a> <span aria-hidden="true">/</span> <span aria-current="page">Nightfall</span></p>
+<section class="case-hero" aria-labelledby="case-title">
+<h1 id="case-title">Nightfall<span>Hide-and-seek, played across the city.</span></h1>
+<p class="case-lede">A native iPhone game of real-world hide-and-seek. I designed the game, the interface and the backend that keeps every player's position private.</p>
+<dl class="case-meta glass"><div><dt>My role</dt><dd>Game, product &amp; iOS design and development</dd></div><div><dt>Platform</dt><dd>iPhone · iOS 17+</dd></div><div><dt>Status</dt><dd>TestFlight beta</dd></div><div><dt>When</dt><dd>2026</dd></div></dl>
+</section>
+
+<figure class="screens glass nightfall-tint" data-reveal>
+<div class="phone"><img src="../assets/nightfall-briefing.webp" width="640" height="1392" alt="Hunter role briefing in red, with head start and match length" decoding="async"></div>
+<div class="phone"><img src="../assets/nightfall-map.webp" width="640" height="1392" alt="Live practice map with the match clock, next-clue timer and the shrinking red zone" decoding="async"></div>
+<div class="phone"><img src="../assets/nightfall-report.webp" width="640" height="1392" alt="Match report reading Hunters win, with match time, tags and Shadows left" decoding="async"></div>
+<figcaption>Role briefing, live match and match report.</figcaption>
+</figure>
+
+<section class="stats glass" aria-label="Key numbers" data-reveal><div class="stat"><strong>3</strong><span>game modes</span></div><div class="stat"><strong>6</strong><span>characters, one ability each</span></div><div class="stat"><strong>9</strong><span>chapter interactive guide</span></div><div class="stat"><strong>40+</strong><span>automated app tests</span></div><p class="stats-note">Test counts are simulator runs. Two-phone outdoor play is still being tested.</p></section>
+
+<section class="case-section" aria-labelledby="idea-title">
+<h2 id="idea-title">The idea</h2>
+<p>Two teams play outside in a shared zone. <strong>Hunters</strong> chase; <strong>Shadows</strong> hide. Hunters never see a live position, only an approximate clue of where each Shadow <em>was</em>, delivered on a timer. The zone shrinks, the clock runs down, and a tag is a real touch that both phones then confirm.</p>
+<div class="card-grid"><article class="info-card glass" data-reveal><h3>Hunters</h3><p>Follow the clues and find every Shadow before the clock runs out. Briefings and wins are shown in red.</p></article><article class="info-card glass" data-reveal><h3>Shadows</h3><p>Stay hidden inside the zone. If one Shadow survives to the deadline, the Shadows win. Their screens are black.</p></article><article class="info-card glass" data-reveal><h3>Fair by design</h3><p>Clues are delayed and approximate, the clock only starts when you tap Start match, and every tag needs both players to confirm.</p></article></div>
+</section>
+
+<section class="case-section" aria-labelledby="modes-title">
+<h2 id="modes-title">Three ways to play</h2>
+<p>Each mode changes the pace and how much information Hunters get. Hosts can also adjust round length, head start, clue interval and zone size.</p>
+<div class="table-wrap glass" data-reveal><table>
+<thead><tr><th scope="col">Mode</th><th scope="col">Round</th><th scope="col">Head start</th><th scope="col">Clues</th><th scope="col">When a Shadow is tagged</th></tr></thead>
+<tbody>
+<tr><td>Classic Manhunt</td><td>30 min</td><td>3 min</td><td>From minute 6, then every 3 min</td><td>Becomes a spectator</td></tr>
+<tr><td>Infection</td><td>20 min</td><td>2 min</td><td>From minute 5, then every 3 min</td><td>Joins the Hunters</td></tr>
+<tr><td>Blackout</td><td>15 min</td><td>2 min</td><td>None. Hunters feel a vibration that grows stronger when a Shadow is near</td><td>Becomes a spectator</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="case-section" aria-labelledby="design-title">
+<h2 id="design-title">Design decisions</h2>
+<div class="card-grid"><article class="info-card glass" data-reveal><h3>Black, white and red</h3><p>A small palette that reads outdoors at a glance: red for Hunters, black for Shadows, white for the action you take next.</p></article><article class="info-card glass" data-reveal><h3>Native first</h3><p>SF typography, SF Symbols, native sheets and haptics, and Liquid Glass controls on iOS 26, with Light, Dark and Reduce Motion support.</p></article><article class="info-card glass" data-reveal><h3>Logo kept for the icon</h3><p>The three-slash mark appears only on the app icon and a short opening animation, so match screens stay clear.</p></article><article class="info-card glass" data-reveal><h3>Teach by playing</h3><p>A nine-chapter guide plays a scripted match in a 3D night-city scene, using the same match display as the real game.</p></article><article class="info-card glass" data-reveal><h3>Safety in reach</h3><p>Help &amp; safety is one tap away in setup and during a match, with an emergency call button and your current street address.</p></article><article class="info-card glass" data-reveal><h3>One vocabulary</h3><p>I rewrote around 120 strings so every screen uses the same words: match, zone, clue, match code.</p></article></div>
+</section>
+
+<section class="case-section" aria-labelledby="built-title">
+<h2 id="built-title">What I built</h2>
+<div class="card-grid two"><article class="info-card glass" data-reveal><h3>The iPhone app</h3><p>SwiftUI with MapKit: player setup, match setup with picture cards for modes and characters, the live match display, tag confirmation, match reports and rematches. Practice mode works offline with demo players.</p></article><article class="info-card glass" data-reveal><h3>Matches run on the server</h3><p>A Supabase backend is the referee for every live match. Row-level security protects every table, exact positions are stored privately, and tags need a recent proximity check plus the Shadow's confirmation.</p></article></div>
+</section>
+
+<details class="notes glass" data-reveal><summary><span><strong>Technical notes &amp; limits</strong><small>Privacy, backend and what still needs testing</small></span><span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary>
+<div class="notes-body">
+<h3>Privacy</h3>
+<ul><li><strong>Consent tied to sign-in:</strong> location sharing is only on during a live match the player has agreed to, and only uses fresh, accurate readings taken after consent.</li>
+<li><strong>Coarse by default:</strong> Hunters receive delayed, approximate clues. In Blackout the server only sends a rough distance band for vibration.</li>
+<li><strong>Accounts:</strong> Sign in with Apple, in-app account deletion, private reports and player blocking.</li></ul>
+<h3>Backend</h3>
+<p>PostgreSQL with row-level security, authenticated Edge Functions for every match action, private Realtime channels, server-set deadlines and protection against duplicate or racing requests. It's covered by database, request-handler and full-stack tests.</p>
+<h3>What still needs testing</h3>
+<p>A full two-iPhone outdoor match, account deletion with a real account, and how the vibration feels on a physical phone. GPS sent by a phone still isn't proof of where that phone is, which is why tags also need the other player to confirm.</p>
+<div class="toolset"><span class="toolset-label">Tools used</span><ul class="tool-logos" aria-label="Tools used"><li title="Swift"><img src="../assets/logos/swift.svg" alt="Swift" width="24" height="24" loading="lazy"></li><li title="SQL"><img src="../assets/logos/sql.svg" alt="SQL" width="24" height="24" loading="lazy"></li><li title="TypeScript"><img src="../assets/logos/typescript.svg" alt="TypeScript" width="24" height="24" loading="lazy"></li><li title="Git"><img src="../assets/logos/git.svg" alt="Git" width="24" height="24" loading="lazy"></li><li title="Figma"><img src="../assets/logos/figma.svg" alt="Figma" width="24" height="24" loading="lazy"></li></ul></div></div></details>
+
+<p class="tool-line">Swift · SwiftUI · MapKit · Supabase · PostgreSQL · Edge Functions · XcodeGen</p>
+<nav class="case-next" aria-label="More projects"><a class="glass is-lit" href="../index.html#work"><small>Back</small><span>All projects</span></a><a class="glass is-lit" href="paidly-product-design.html"><small>Next project</small><span>Paidly →</span></a></nav>
+</main>
+<footer class="wrap site-footer">
+<span>© 2026 Chiru Gowda · Melbourne</span>
+<nav aria-label="Footer"><a href="../index.html#work">Projects</a><a href="../about.html">Off the clock</a><a href="mailto:chiranthgowdaofficial@gmail.com">Email</a><a href="https://www.linkedin.com/in/chiranthgowdaofficial" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/chiranthgowdaxaus" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+</footer>
+</body>
+</html>

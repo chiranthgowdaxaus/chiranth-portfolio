@@ -1,120 +1,127 @@
 "use strict";
 
-document.querySelectorAll(".nav-toggle").forEach(toggle => {
-  const nav = toggle.closest(".nav");
-  const close = () => {
-    nav.classList.remove("is-open");
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-label", "Open navigation");
-  };
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
+document.documentElement.classList.add("js");
+
+/* Mobile navigation */
+document.querySelectorAll(".nav-toggle").forEach((toggle) => {
+  const bar = toggle.closest(".nav-bar");
+  const setOpen = (open) => {
+    bar.classList.toggle("is-open", open);
     toggle.setAttribute("aria-expanded", String(open));
-    toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  };
+  toggle.addEventListener("click", () => setOpen(!bar.classList.contains("is-open")));
+  bar.querySelectorAll(".nav-links a").forEach((link) => link.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && bar.classList.contains("is-open")) { setOpen(false); toggle.focus(); }
   });
-  nav.querySelectorAll("a").forEach(link => link.addEventListener("click", close));
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && nav.classList.contains("is-open")) {
-      close();
-      toggle.focus();
-    }
-  });
-  document.addEventListener("click", event => {
-    if (!nav.contains(event.target)) close();
-  });
+  document.addEventListener("click", (event) => { if (!bar.contains(event.target)) setOpen(false); });
 });
 
-const projectGrid = document.querySelector(".work-grid");
-const projectFilters = [...document.querySelectorAll("[data-project-filter]")];
-if (projectGrid && projectFilters.length) {
+/* Project filter (segmented control) */
+const projectGrid = document.querySelector("[data-project-grid]");
+const filters = [...document.querySelectorAll("[data-project-filter]")];
+if (projectGrid && filters.length) {
   const cards = [...projectGrid.querySelectorAll("[data-project-categories]")];
   const status = document.querySelector("[data-project-status]");
-  projectFilters.forEach(button => {
+  filters.forEach((button) => {
     button.disabled = false;
     button.addEventListener("click", () => {
       const filter = button.dataset.projectFilter;
-      projectGrid.dataset.filter = filter;
-      projectFilters.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
-      const visible = cards.filter(card => {
+      filters.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      let shown = 0;
+      cards.forEach((card) => {
         card.hidden = filter !== "all" && !card.dataset.projectCategories.split(" ").includes(filter);
-        return !card.hidden;
+        if (!card.hidden) { shown += 1; card.classList.add("is-visible"); }
       });
-      if (status) status.textContent = `${visible.length} projects${filter === "all" ? "" : ` in ${filter}`}`;
-      if (window.gsap) {
-        gsap.killTweensOf(cards);
-        gsap.set(visible, { clearProps: "opacity,transform" });
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-          gsap.fromTo(visible, { opacity: .35, y: 10 }, { opacity: 1, y: 0, duration: .3, stagger: .04, clearProps: "opacity,transform" });
-        }
-      }
-      if (window.ScrollTrigger) ScrollTrigger.refresh();
+      if (status) status.textContent = `${shown} project${shown === 1 ? "" : "s"}${filter === "all" ? "" : ` in ${filter}`}`;
     });
   });
 }
 
+/* Section highlighting in the nav */
 if ("IntersectionObserver" in window) {
-  const locations = [["work", ".nav-work"], ["expertise", ".nav-expertise"]];
-  const sections = locations.map(([id, selector]) => [document.getElementById(id), document.querySelector(selector)]).filter(([section, link]) => section && link);
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const pair = sections.find(([section]) => section === entry.target);
-      if (pair) {
-        if (entry.isIntersecting) pair[1].setAttribute("aria-current", "location");
-        else pair[1].removeAttribute("aria-current");
-      }
+  const pairs = [...document.querySelectorAll(".nav-links a[href^='#']")]
+    .map((link) => [document.querySelector(link.getAttribute("href")), link])
+    .filter(([section]) => section);
+  const inView = new Set();
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) inView.add(entry.target);
+      else inView.delete(entry.target);
     });
-  }, { rootMargin: "-15% 0px -55% 0px", threshold: 0 });
-  sections.forEach(([section]) => observer.observe(section));
+    // Only the last section crossing the reading line is current.
+    const active = [...pairs].reverse().find(([section]) => inView.has(section));
+    pairs.forEach(([section, link]) => {
+      if (active && section === active[0]) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  }, { rootMargin: "-30% 0px -60% 0px" });
+  pairs.forEach(([section]) => spy.observe(section));
 }
 
-document.querySelectorAll(".copy-email").forEach(button => {
-  let resetTimer;
+/* Scroll reveal */
+const revealTargets = document.querySelectorAll("[data-reveal]");
+if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const reveal = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      reveal.unobserve(entry.target);
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  revealTargets.forEach((element, index) => {
+    element.style.transitionDelay = `${Math.min(index % 3, 2) * 70}ms`;
+    reveal.observe(element);
+  });
+} else {
+  revealTargets.forEach((element) => element.classList.add("is-visible"));
+}
+
+/* Light that follows the pointer across interactive glass */
+if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  document.querySelectorAll(".glass.is-lit").forEach((surface) => {
+    surface.addEventListener("pointermove", (event) => {
+      const rect = surface.getBoundingClientRect();
+      surface.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+      surface.style.setProperty("--my", `${event.clientY - rect.top}px`);
+    }, { passive: true });
+  });
+}
+
+/* Layout-grid overlay on the FreshOn posters */
+document.querySelectorAll("[data-grid-toggle]").forEach((toggle) => {
+  const target = document.getElementById(toggle.getAttribute("aria-controls"));
+  toggle.hidden = false;
+  toggle.addEventListener("click", () => {
+    const on = toggle.getAttribute("aria-pressed") !== "true";
+    toggle.setAttribute("aria-pressed", String(on));
+    target.classList.toggle("show-grid", on);
+  });
+});
+
+/* Copy email */
+document.querySelectorAll(".copy-email").forEach((button) => {
+  let timer;
   button.addEventListener("click", async () => {
     const status = document.getElementById("copy-status");
     try {
-      await navigator.clipboard.writeText("chiranthgowdaofficial@gmail.com");
-      button.textContent = "Copied!";
-      if (status) status.textContent = "Email copied.";
-      clearTimeout(resetTimer);
-      resetTimer = window.setTimeout(() => {
-        button.textContent = "Copy email";
+      await navigator.clipboard.writeText(button.dataset.email);
+      button.textContent = "Copied";
+      if (status) status.textContent = "Email address copied.";
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        button.textContent = "Copy";
         if (status) status.textContent = "";
-      }, 3500);
+      }, 3000);
     } catch {
-      if (status) status.textContent = "Select and copy the email address above.";
+      if (status) status.textContent = "Select and copy the address instead.";
     }
   });
 });
 
-if (window.gsap && window.ScrollTrigger) {
-  gsap.registerPlugin(ScrollTrigger);
-  const media = gsap.matchMedia();
-  media.add("(prefers-reduced-motion: no-preference)", () => {
-    const hero = document.querySelector(".hero:not(.about-hero)");
-    if (hero) {
-      gsap.timeline({ defaults: { ease: "power3.out" } })
-        .from(".headline-line", { y: 22, opacity: 0, duration: .65, stagger: .1 })
-        .from(".hero-intro, .hero-actions, .availability", { y: 12, opacity: 0, duration: .5, stagger: .07 }, .2)
-        .from(".hero-product", { opacity: 0, y: 12, duration: .8 }, .1);
-    }
-    const reveals = gsap.utils.toArray("[data-reveal], .about-hero, .case-hero, .case-summary article, .outcome-band, .interest-row, .app-note, .field-grid article");
-    reveals.filter(element => !element.parentElement.closest("[data-reveal]")).forEach(element => {
-      gsap.from(element, {
-        y: 18, opacity: 0, duration: .6, ease: "power2.out",
-        scrollTrigger: { trigger: element, start: "top 94%", once: true }
-      });
-    });
-    const progress = document.querySelector(".reading-progress");
-    if (progress) gsap.to(progress, {
-      scaleX: 1, ease: "none",
-      scrollTrigger: { trigger: document.body, start: "top top", end: "bottom bottom", scrub: true }
-    });
-  });
-  window.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
-  if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
-}
-
-if (location.hostname !== "127.0.0.1" && location.hostname !== "localhost" && location.protocol === "https:") {
+/* Vercel analytics, only on the deployed site */
+if (location.protocol === "https:" && !["localhost", "127.0.0.1"].includes(location.hostname)) {
   const analytics = document.createElement("script");
   analytics.src = "/_vercel/insights/script.js";
   analytics.defer = true;
