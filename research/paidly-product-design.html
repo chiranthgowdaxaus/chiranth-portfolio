@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Paidly · UI/UX &amp; product design | Chiru Gowda</title>
-<meta name="description" content="Paidly UI/UX case study by Chiru Gowda: bill-tracking flows, four-tab navigation, a calendar layout and clear payment states, with an interactive preview.">
+<title>Paidly · iPhone app design &amp; development | Chiru Gowda</title>
+<meta name="description" content="Paidly is a bill tracker for iPhone that reminds you until a bill is paid. Product design and native SwiftUI development by Chiru Gowda.">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Paidly · UI/UX &amp; product design | Chiru Gowda">
-<meta property="og:description" content="Paidly UI/UX case study by Chiru Gowda: bill-tracking flows, four-tab navigation, a calendar layout and clear payment states, with an interactive preview.">
+<meta property="og:title" content="Paidly · iPhone app design &amp; development | Chiru Gowda">
+<meta property="og:description" content="Paidly is a bill tracker for iPhone that reminds you until a bill is paid. Product design and native SwiftUI development by Chiru Gowda.">
 <meta property="og:type" content="website">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../assets/site.css?v=20261116">
+<link rel="stylesheet" href="../assets/site.css?v=20261118h">
 <script>document.documentElement.classList.add("js")</script>
-<script defer src="../assets/site.js?v=20261116"></script>
-<script defer src="../assets/app-previews.js?v=20261116"></script>
+<script defer src="../assets/site.js?v=20261118h"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -29,49 +28,40 @@
 <p class="breadcrumb"><a href="../index.html#work">Projects</a> <span aria-hidden="true">/</span> <span aria-current="page">Paidly</span></p>
 <section class="case-hero" aria-labelledby="case-title">
 <h1 id="case-title">Paidly<span>Bills, made clearer.</span></h1>
-<p class="case-lede">I designed and built a bill-tracking app around three questions: what's due, when is it due, and has it been paid?</p>
-<dl class="case-meta glass"><div><dt>My role</dt><dd>Product design &amp; development</dd></div><div><dt>Context</dt><dd>Personal project</dd></div><div><dt>Status</dt><dd>TestFlight (internal)</dd></div><div><dt>When</dt><dd>2026</dd></div></dl>
+<p class="case-lede">A bill tracker for iPhone. It reminds you before a bill is due and keeps reminding you until it's paid. I designed it and built it natively in SwiftUI.</p>
+<dl class="case-meta glass"><div><dt>My role</dt><dd>Product design &amp; iOS development</dd></div><div><dt>Platform</dt><dd>iPhone · widgets · Apple Watch</dd></div><div><dt>Built with</dt><dd>SwiftUI, Supabase</dd></div><div><dt>When</dt><dd>2026</dd></div></dl>
 </section>
 
 <figure class="screens glass" data-reveal>
-<div class="phone"><img src="../assets/paidly-calendar.webp" width="386" height="835" alt="Paidly calendar with bill markers on dates" decoding="async"></div>
-<div class="phone"><img src="../assets/paidly-home.webp" width="386" height="835" alt="Paidly home screen listing upcoming bills" decoding="async"></div>
-<figcaption>Calendar and Home screens.</figcaption>
+<div class="phone"><img src="../assets/paidly-bills.webp" width="640" height="1391" alt="Paidly bill list grouped into This week and Later, with totals" decoding="async"></div>
+<div class="phone"><img src="../assets/paidly-home.webp" width="640" height="1391" alt="Paidly home screen with the next bill, Electricity, due tomorrow, and a slide to mark paid control" decoding="async"></div>
+<div class="phone"><img src="../assets/paidly-bill.webp" width="640" height="1391" alt="Paidly bill page for a card payment, with the amount, a one-sentence summary and the card face" decoding="async"></div>
+<figcaption>Bill list, home and a bill page, captured from the iPhone app with sample data.</figcaption>
 </figure>
 
-<section class="case-section" aria-labelledby="summary-title">
-<h2 id="summary-title">Overview</h2>
-<div class="card-grid"><article class="info-card glass" data-reveal><h3>The task</h3><p>Keep recurring bills, payment history and shared costs in one place without making everyday actions hard to find.</p></article><article class="info-card glass" data-reveal><h3>What I designed</h3><p>Four-tab navigation, bill cards, a due-date calendar and distinct states for bills and shared balances.</p></article><article class="info-card glass" data-reveal><h3>What I built</h3><p>The interface, recurring-bill logic, sign-in and stored records. An iOS build is in internal TestFlight testing.</p></article></div>
+<section class="case-section" aria-labelledby="what-title">
+<h2 id="what-title">What it does</h2>
+<p>Paidly answers three questions at a glance: what's due, when, and has it been paid? It records payments; it never moves money or connects to a bank.</p>
+<div class="card-grid"><article class="info-card glass" data-reveal><h3>Next bill first</h3><p>Home leads with the next bill as one big card. Slide to mark it paid, and a repeating bill creates its next one automatically.</p></article><article class="info-card glass" data-reveal><h3>Reminders until it's paid</h3><p>Alerts start a few days before the due date and repeat daily until the bill is marked paid, right from the notification.</p></article><article class="info-card glass" data-reveal><h3>The month at a glance</h3><p>What's left, what's paid and income for the month, with a calendar that marks every due date.</p></article><article class="info-card glass" data-reveal><h3>Family splits</h3><p>Share a bill with a family group, split it equally or by amount, and track who has settled up.</p></article><article class="info-card glass" data-reveal><h3>Widgets and Watch</h3><p>Home and lock screen widgets show what's due next. A separate Apple Watch app works on its own.</p></article><article class="info-card glass" data-reveal><h3>Works offline</h3><p>Bills stay on the phone without an account. Signing in syncs them to the web, Android and Watch apps.</p></article></div>
 </section>
 
-<section class="case-section" aria-labelledby="try-title">
-<h2 id="try-title">Try the main flow</h2>
-<p>Home shows bills and their due dates. Each card keeps its payment action in the same place. Marking a bill paid records the payment and creates the next recurring bill once. Paidly records balances; it doesn't move money.</p>
-<ol class="flow" aria-label="Record a bill payment"><li><span class="glass">Find a bill</span></li><li><span class="glass">Check details</span></li><li><span class="glass">Mark paid</span></li></ol>
+<figure class="screens screens--single glass" data-reveal>
+<div class="phone"><img src="../assets/paidly-month.webp" width="640" height="1391" alt="Paidly month view showing amounts left, bills, paid and income above a November calendar with due-date dots" decoding="async"></div>
+<figcaption>The month view.</figcaption>
+</figure>
 
-<section class="app-window glass" data-paidly-preview aria-label="Paidly interactive web preview" data-reveal>
-<div class="app-window-head"><span class="app-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6"/></svg></span><div><h3>Paidly</h3><p>Bill tracker</p></div></div>
-<div class="preview-summary"><div><span>Due soon</span><strong data-bill-total>A$80</strong></div><div><span>Recorded paid</span><strong data-paid-total>A$0</strong></div></div>
-<label class="preview-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><span class="sr-only">Search sample bills</span><input type="search" placeholder="Search bills" data-bill-search autocomplete="off"></label>
-<div class="preview-list-heading"><p data-bill-count aria-live="polite">2 upcoming bills</p><div class="preview-filters" role="group" aria-label="Payment status"><button type="button" data-bill-filter="upcoming" aria-pressed="true" disabled>Upcoming</button><button type="button" data-bill-filter="paid" aria-pressed="false" disabled>Paid</button></div></div>
-<ul class="preview-bills">
-<li class="preview-bill" data-preview-bill="internet" data-bill-amount="65" data-bill-name="Internet"><div class="bill-topline"><span class="bill-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6"/></svg></span><strong>A$65</strong></div><div><h3>Internet</h3><p>Due 22 Oct</p></div><button type="button" data-record-payment aria-label="Mark Internet paid in the preview" disabled>Mark paid</button></li>
-<li class="preview-bill" data-preview-bill="subscription" data-bill-amount="15" data-bill-name="Subscription"><div class="bill-topline"><span class="bill-symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6"/></svg></span><strong>A$15</strong></div><div><h3>Subscription</h3><p>Due 22 Oct</p></div><button type="button" data-record-payment aria-label="Mark Subscription paid in the preview" disabled>Mark paid</button></li>
-</ul>
-<p class="preview-empty" data-bill-empty hidden>No bills here yet.</p>
-<div class="preview-footer"><p role="status" data-bill-status>Sample data only. No real payments.</p><button class="preview-reset" type="button" data-bill-reset disabled>Reset</button></div>
-<p class="preview-note">A web recreation of the bill flow, not the shipped app.</p>
-<noscript><p class="preview-note">Turn on JavaScript to try the controls.</p></noscript>
-</section>
+<section class="case-section" aria-labelledby="design-title">
+<h2 id="design-title">Design decisions</h2>
+<div class="card-grid"><article class="info-card glass" data-reveal><h3>One accent colour</h3><p>Emerald is the only accent. Late bills turn orange, never red, so a missed bill feels fixable rather than alarming.</p></article><article class="info-card glass" data-reveal><h3>The amount is the headline</h3><p>Amounts use SF Pro Compressed at a huge size. Labels are small spaced capitals, so the number always reads first.</p></article><article class="info-card glass" data-reveal><h3>Four tabs, no more</h3><p>Bills, Split, Month and You. History and settings live inside You instead of taking more tabs.</p></article></div>
 </section>
 
-<section class="case-section" aria-labelledby="decisions-title">
-<h2 id="decisions-title">Design decisions</h2>
-<div class="card-grid"><article class="info-card glass" data-reveal><h3>Fewer destinations</h3><p>I cut six navigation items to four: Home, Calendar, Overview and Settings. Payment history lives in Settings instead of taking a tab.</p></article><article class="info-card glass" data-reveal><h3>Room for the action</h3><p>Bill cards reserve space for the payment button. I adjusted long titles, dates and spacing after checking narrow layouts at 320 and 390 pixels.</p></article><article class="info-card glass" data-reveal><h3>A calendar that doesn't jump</h3><p>Bill markers sit inside each date cell without moving the date number. Selecting a date shows its bills below the calendar.</p></article><article class="info-card glass" data-reveal><h3>Separate payment states</h3><p>Paying a bill to a company is different from friends settling a shared balance. The two stay separate so one action never implies the other.</p></article><article class="info-card glass" data-reveal><h3>Design through to code</h3><p>I designed the flows, built the reusable UI and implemented it. Layout checks caught a header covering content and cramped card actions.</p></article><article class="info-card glass" data-reveal><h3>What still needs testing</h3><p>Syncing splits between two accounts and alerts on physical devices. This is a working design in internal testing, not a measured user outcome.</p></article></div>
+<section class="case-section" aria-labelledby="built-title">
+<h2 id="built-title">How it's built</h2>
+<div class="card-grid two"><article class="info-card glass" data-reveal><h3>Native iPhone app</h3><p>SwiftUI with no third-party packages, iOS 18 and later. Local notifications with a Mark as paid action, WidgetKit widgets, haptics and sounds that respect Reduce Motion.</p></article><article class="info-card glass" data-reveal><h3>One backend for every device</h3><p>Supabase and PostgreSQL with row-level security, so personal bills stay private and shared bills are visible only to the family group. Revision checks stop an old edit overwriting a newer one.</p></article></div>
 </section>
 
-<p class="tool-line">TypeScript · React Native · Expo · Supabase · PostgreSQL</p>
-<nav class="case-next" aria-label="More projects"><a class="glass is-lit" href="nightfall.html"><small>Back</small><span>Nightfall</span></a><a class="glass is-lit" href="wearable-sensor-analytics.html"><small>Next project</small><span>Wearable sensor analytics →</span></a></nav>
+<p class="tool-line">Swift · SwiftUI · WidgetKit · Supabase · PostgreSQL. Notification delivery still needs testing on physical devices.</p>
+<nav class="case-next" aria-label="More projects"><a class="glass is-lit" href="nightfall.html"><small>Back</small><span>Nightfall</span></a><a class="glass is-lit" href="repway.html"><small>Next project</small><span>Repway →</span></a></nav>
 </main>
 <footer class="wrap site-footer">
 <span>© 2026 Chiru Gowda · Melbourne</span>

@@ -11,9 +11,9 @@
 <meta property="og:description" content="Python pipelines for EMG and knee-angle data: signal cleaning, repetition detection, feature extraction and subject-aware model evaluation.">
 <meta property="og:type" content="website">
 <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../assets/site.css?v=20261116">
+<link rel="stylesheet" href="../assets/site.css?v=20261118h">
 <script>document.documentElement.classList.add("js")</script>
-<script defer src="../assets/site.js?v=20261116"></script>
+<script defer src="../assets/site.js?v=20261118h"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -43,7 +43,7 @@
 <h3>The decisions that mattered</h3><ul><li><strong>Robust normalisation:</strong> used the 95th percentile instead of the single maximum. Without MVC calibration, the output is relative activation, not a clinical percentage.</li><li><strong>Adaptive rep detection:</strong> smoothed the knee angle with Savitzky-Golay and checked peaks against movement, rather than relying on one fixed threshold.</li><li><strong>Baselines first:</strong> compared threshold rules, Logistic Regression, KNN, SVM and Gradient Boosting before choosing a multi-muscle Random Forest.</li><li><strong>Subject-aware evaluation:</strong> used leave-one-subject-out validation so overlapping windows from one person couldn't make a random split look better than it was.</li></ul>
 <h3>Results and limits</h3><p>Prepared test-set R²: RF <strong>0.967</strong>, VM <strong>0.959</strong>, BF <strong>0.949</strong>, ST <strong>0.915</strong>. MAE: 2.75, 2.80, 2.83 and 3.05 on the processed activation scale. These describe that dataset and split, not a guarantee for a new athlete or new hardware.</p><p>Next steps: collect MVC calibration, validate on new athletes and exercises, and add uncertainty estimates. This is an analytics foundation, not a medical or diagnostic product.</p>
 <div class="toolset"><span class="toolset-label">Tools used</span><ul class="tool-logos" aria-label="Tools used"><li title="Python"><img src="../assets/logos/python.svg" alt="Python" width="24" height="24" loading="lazy"></li><li title="pandas"><img src="../assets/logos/pandas.svg" alt="pandas" width="24" height="24" loading="lazy"></li><li title="NumPy"><img src="../assets/logos/numpy.svg" alt="NumPy" width="24" height="24" loading="lazy"></li><li title="SciPy"><img src="../assets/logos/scipy.svg" alt="SciPy" width="24" height="24" loading="lazy"></li><li title="scikit-learn"><img src="../assets/logos/scikitlearn.svg" alt="scikit-learn" width="24" height="24" loading="lazy"></li><li title="Matplotlib"><img src="../assets/logos/matplotlib.svg" alt="Matplotlib" width="24" height="24" loading="lazy"></li><li title="Git"><img src="../assets/logos/git.svg" alt="Git" width="24" height="24" loading="lazy"></li></ul></div></div></details>
-<nav class="case-next" aria-label="More projects"><a class="glass is-lit" href="paidly-product-design.html"><small>Back</small><span>Paidly</span></a><a class="glass is-lit" href="afl-crowd-monitoring.html"><small>Next project</small><span>AFL crowd monitoring →</span></a></nav>
+<nav class="case-next" aria-label="More projects"><a class="glass is-lit" href="repway.html"><small>Back</small><span>Repway</span></a><a class="glass is-lit" href="afl-crowd-monitoring.html"><small>Next project</small><span>AFL crowd monitoring →</span></a></nav>
 </main>
 <footer class="wrap site-footer">
 <span>© 2026 Chiru Gowda · Melbourne</span>

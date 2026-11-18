@@ -18,27 +18,6 @@ document.querySelectorAll(".nav-toggle").forEach((toggle) => {
   document.addEventListener("click", (event) => { if (!bar.contains(event.target)) setOpen(false); });
 });
 
-/* Project filter (segmented control) */
-const projectGrid = document.querySelector("[data-project-grid]");
-const filters = [...document.querySelectorAll("[data-project-filter]")];
-if (projectGrid && filters.length) {
-  const cards = [...projectGrid.querySelectorAll("[data-project-categories]")];
-  const status = document.querySelector("[data-project-status]");
-  filters.forEach((button) => {
-    button.disabled = false;
-    button.addEventListener("click", () => {
-      const filter = button.dataset.projectFilter;
-      filters.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-      let shown = 0;
-      cards.forEach((card) => {
-        card.hidden = filter !== "all" && !card.dataset.projectCategories.split(" ").includes(filter);
-        if (!card.hidden) { shown += 1; card.classList.add("is-visible"); }
-      });
-      if (status) status.textContent = `${shown} project${shown === 1 ? "" : "s"}${filter === "all" ? "" : ` in ${filter}`}`;
-    });
-  });
-}
-
 /* Section highlighting in the nav */
 if ("IntersectionObserver" in window) {
   const pairs = [...document.querySelectorAll(".nav-links a[href^='#']")]
@@ -98,6 +77,39 @@ document.querySelectorAll("[data-grid-toggle]").forEach((toggle) => {
     toggle.setAttribute("aria-pressed", String(on));
     target.classList.toggle("show-grid", on);
   });
+});
+
+/* Speed dials on the Off the clock page */
+document.querySelectorAll("[data-cluster]").forEach((cluster) => {
+  const gauges = [...cluster.querySelectorAll("[data-gauge]")];
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let frame = 0;
+  const show = (progress) => gauges.forEach((gauge) => {
+    gauge.querySelector("[data-gauge-value]").textContent = Math.round(Number(gauge.dataset.gauge) * progress);
+  });
+  const run = () => {
+    cancelAnimationFrame(frame);
+    gauges.forEach((gauge) => gauge.classList.remove("is-on"));
+    show(still ? 1 : 0);
+    cluster.getBoundingClientRect();
+    gauges.forEach((gauge) => gauge.classList.add("is-on"));
+    if (still) return;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min((now - start) / 1900, 1);
+      show(1 - Math.pow(1 - t, 4));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+  };
+  show(still ? 1 : 0);
+  if (still || !("IntersectionObserver" in window)) { run(); return; }
+  const watcher = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    watcher.disconnect();
+    run();
+  }, { threshold: 0.35 });
+  watcher.observe(cluster);
 });
 
 /* Copy email */
