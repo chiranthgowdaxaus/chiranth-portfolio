@@ -149,19 +149,65 @@
     box.querySelector("button.stage-action").addEventListener("click", () => { mode = "loso"; $$(".seg button", box).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === "loso"))); held = (held + 1) % people; paint(mode); }); paint(mode);
   });
 
-  /* Crowd heatmap */
-  $$("[data-heat]").forEach((box) => {
-    const view = box.querySelector("[data-heat-view]"), steps = $$(".pipeline li", box), out = box.querySelector("[data-heat-out]"); let size = 10, input = "normal";
+  /* Stadium crowd heatmap */
+  $$("[data-stadium]").forEach((box) => {
+    const svg = box.querySelector("svg"), layer = svg.querySelector("[data-heat-layer]"), plan = svg.querySelector("[data-plan]"), seatsG = svg.querySelector("[data-seats]");
+    const error = box.querySelector("[data-stadium-error]"), steps = $$(".pipeline li", box), out = box.querySelector("[data-heat-out]");
+    const CX = 400, CY = 290, RX = 196, RY = 150, SECTORS = 32, GAP = .011;
+    const TIERS = [[24, 58, "lower tier"], [68, 102, "middle tier"], [114, 148, "upper tier"]];
+    const rand = (n) => { const x = Math.sin(n * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
+    const pt = (a, d) => [CX + (RX + d) * Math.cos(a), CY + (RY + d * .9) * Math.sin(a)];
+    const f = (n) => n.toFixed(1);
     const stops = [[23, 17, 47], [92, 31, 122], [196, 58, 91], [245, 138, 60], [252, 227, 138]];
-    const color = (v) => { const p = Math.min(.999, v) * 4, i = Math.floor(p), f = p - i, c = stops[i].map((n, k) => Math.round(n + (stops[i + 1][k] - n) * f)); return `rgb(${c})`; };
-    const draw = () => {
-      steps.forEach((s) => s.classList.remove("is-on", "is-bad"));
-      if (input === "bad") { view.innerHTML = '<div class="heat-error">Rejected before rendering: one row is shorter than the others.</div>'; steps[0].classList.add("is-on"); steps[1].classList.add("is-bad"); out.textContent = "No image. A clear error goes back to the service."; return; }
-      const raw = []; for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) { const u = x / (size - 1), v = y / (size - 1); raw.push(input === "flat" ? 40 : 90 * Math.exp(-((u - .3) ** 2 + (v - .35) ** 2) / .035) + 60 * Math.exp(-((u - .72) ** 2 + (v - .66) ** 2) / .05) + 8 * (1 + Math.sin(x * 2.3 + y))); }
-      const lo = Math.min(...raw), hi = Math.max(...raw), range = hi - lo;
-      view.innerHTML = `<div class="heat" style="grid-template-columns:repeat(${size},1fr)">${raw.map((n) => `<i style="background:${color(range ? (n - lo) / range : 0)}"></i>`).join("")}</div>`;
-      steps.forEach((s) => s.classList.add("is-on")); out.textContent = input === "flat" ? "All values match, so normalising safely avoids dividing by zero." : `${size} × ${size} grid saved as PNG, with its file path returned.`;
+    const color = (v) => { const p = Math.min(.999, Math.max(0, v)) * 4, i = Math.floor(p), t = p - i; return `rgb(${stops[i].map((n, k) => Math.round(n + (stops[i + 1][k] - n) * t))})`; };
+    const area = (a) => { const s = Math.sin(a), c = Math.cos(a); return Math.abs(s) > .72 ? (s < 0 ? "top wing" : "bottom wing") : Math.abs(c) > .9 ? (c < 0 ? "left end" : "right end") : "pocket"; };
+
+    // Ground markings, drawn once: oval, centre square and circles, 50 m arcs, goal squares, a dimension line.
+    const arc50 = (side) => { const gx = CX + side * RX, r = 128, a0 = Math.acos(Math.min(1, 50 / r)); return `M${f(gx - side * r * Math.cos(.95))} ${f(CY - r * Math.sin(.95))}A${r} ${r} 0 0 ${side > 0 ? 0 : 1} ${f(gx - side * r * Math.cos(.95))} ${f(CY + r * Math.sin(.95))}`; };
+    plan.innerHTML = `<ellipse cx="${CX}" cy="${CY}" rx="${RX}" ry="${RY}"/><ellipse cx="${CX}" cy="${CY}" rx="${RX + 154}" ry="${RY + 140}" stroke-opacity=".45"/>` +
+      `<rect x="${CX - 26}" y="${CY - 26}" width="52" height="52"/><circle cx="${CX}" cy="${CY}" r="16"/><circle cx="${CX}" cy="${CY}" r="4"/><path d="M${CX} ${CY - 10}V${CY + 10}"/>` +
+      `<path d="${arc50(1)}"/><path d="${arc50(-1)}"/>` +
+      [-1, 1].map((s) => `<rect x="${s > 0 ? CX + RX - 12 : CX - RX}" y="${CY - 9}" width="12" height="18"/><path d="M${CX + s * RX} ${CY - 18}V${CY + 18}" stroke-width="2"/>`).join("") +
+      `<g fill="#a9ccff" stroke="none" font-family="ui-monospace,Menlo,monospace" font-size="11" letter-spacing="1.5" opacity=".75"><text x="${CX}" y="${CY - RY + 26}" text-anchor="middle">WING</text><text x="${CX}" y="${CY + RY - 16}" text-anchor="middle">WING</text><text x="${CX - RX - 186}" y="${CY + 4}" text-anchor="middle">END</text><text x="${CX + RX + 186}" y="${CY + 4}" text-anchor="middle">END</text></g>`;
+
+    const sections = [];
+    TIERS.forEach(([r0, r1, tier], t) => {
+      for (let s = 0; s < SECTORS; s++) {
+        const a0 = s / SECTORS * 2 * Math.PI + GAP, a1 = (s + 1) / SECTORS * 2 * Math.PI - GAP, mid = (a0 + a1) / 2;
+        let shape = ""; for (let k = 0; k <= 6; k++) shape += (k ? "L" : "M") + pt(a0 + (a1 - a0) * k / 6, r0).map(f).join(" ");
+        for (let k = 6; k >= 0; k--) shape += "L" + pt(a0 + (a1 - a0) * k / 6, r1).map(f).join(" ");
+        const seats = [];
+        for (let row = 0; row < 4; row++) {
+          const d = r0 + 5 + row * (r1 - r0 - 10) / 3, len = Math.hypot(...[0, 1].map((i) => pt(a1, d)[i] - pt(a0, d)[i])), n = Math.max(3, Math.round(len / 8.2));
+          for (let k = 0; k < n; k++) seats.push(pt(a0 + (a1 - a0) * (k + .5) / n, d));
+        }
+        sections.push({ t, tier, mid, shape: shape + "Z", seats, id: t * SECTORS + s });
+      }
+    });
+
+    const density = (sec, mode) => {
+      if (mode === "flat") return .55;
+      const wing = .5 + .5 * Math.abs(Math.sin(sec.mid)), tierW = [1, .86, .7][sec.t], noise = (rand(sec.id) - .5) * .22;
+      const v = mode === "full" ? .32 + .66 * wing * tierW + noise : (.18 + .62 * wing * [1, .75, .32][sec.t] + noise) * .9;
+      return Math.min(1, Math.max(.04, v));
     };
-    box.addEventListener("segchange", (e) => { const v = e.detail; if (/^\d+$/.test(v)) size = Number(v); else input = v; draw(); }); draw();
+
+    const draw = (mode) => {
+      steps.forEach((s) => s.classList.remove("is-on", "is-bad"));
+      if (mode === "bad") {
+        error.hidden = false; layer.style.opacity = ".08"; seatsG.style.opacity = ".15";
+        steps[0].classList.add("is-on"); steps[1].classList.add("is-bad"); out.textContent = "No image. A clear error goes back to the service instead."; return;
+      }
+      error.hidden = true; layer.style.opacity = ""; seatsG.style.opacity = "";
+      const raw = sections.map((sec) => density(sec, mode)), lo = Math.min(...raw), hi = Math.max(...raw), range = hi - lo;
+      layer.innerHTML = sections.map((sec, i) => `<path d="${sec.shape}" fill="${color(range ? (raw[i] - lo) / range : 0)}"/>`).join("");
+      let filled = 0, total = 0;
+      seatsG.innerHTML = sections.map((sec, i) => sec.seats.map(([x, y], k) => { total++; const on = rand(sec.id * 97 + k) < raw[i]; if (on) filled++;
+        return on ? `<circle cx="${f(x)}" cy="${f(y)}" r="1.9" fill="#fff" fill-opacity=".9"/>` : `<circle cx="${f(x)}" cy="${f(y)}" r="1.5" fill="none" stroke="#9cc3ff" stroke-opacity=".35" stroke-width=".7"/>`; }).join("")).join("");
+      steps.forEach((s) => s.classList.add("is-on"));
+      const top = sections[raw.indexOf(hi)];
+      out.textContent = mode === "flat" ? "Every reading is equal, so normalising avoids dividing by zero and the map stays even." : `${Math.round(filled / total * 100)}% of seats filled · busiest: ${top.tier}, ${area(top.mid)} · saved as PNG with its file path returned`;
+    };
+    box.addEventListener("segchange", (e) => draw(e.detail)); draw("full");
   });
 })();
