@@ -214,3 +214,13 @@
 [data-scheme="light"] .sw .dk { display: none; }
 .fig { font-family: var(--font-display); font-weight: 700; font-stretch: 75%; font-variant-numeric: tabular-nums; }
 .dk {}
+
+/* Stadium heatmap */
+.stadium-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, .8fr); gap: 18px; align-items: center; }
+.stadium-wrap { position: relative; }
+.stadium { display: block; width: 100%; height: auto; border-radius: 16px; }
+.stadium-wrap .heat-error { position: absolute; left: 50%; top: 42%; width: min(80%, 360px); aspect-ratio: auto; transform: translate(-50%, -50%); }
+.stadium-wrap .heat-error[hidden] { display: none; }
+.scale-labels { display: flex; justify-content: space-between; margin-top: 6px; color: var(--dim); font-size: 12px; }
+@media (max-width: 760px) { .stadium-layout { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .seg { flex-wrap: wrap; border-radius: 18px; } }
