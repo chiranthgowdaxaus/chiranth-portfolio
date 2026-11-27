@@ -39,8 +39,9 @@
     const a = audio[name] || (audio[name] = new Audio(`../assets/sounds/paidly-${name}.m4a`));
     a.currentTime = 0; a.volume = name === "tick" ? .4 : .65; a.play().catch(() => {});
   };
+  /* Real haptics through assets/haptics.js: vibration on Android, the system tick on iPhone. */
   function haptic(pulses) {
-    if (navigator.vibrate && navigator.userActivation?.hasBeenActive) navigator.vibrate(pulses.flatMap(([t, a], i) => i ? [Math.max(10, (t - pulses[i - 1][0]) * 1000 - 18), Math.round(10 + a * 18)] : [Math.round(10 + a * 18)]));
+    if (window.hfx && (navigator.userActivation?.hasBeenActive ?? true)) window.hfx.pulses(pulses);
   }
   $$("[data-hap]").forEach((b) => {
     const pulses = JSON.parse(b.dataset.hap);
