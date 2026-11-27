@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Workforce analytics | Chiru Gowda</title>
+<meta name="description" content="Monthly HR reporting for a fictional 1,000-person organisation: headcount against plan, turnover, salary budgets and the pay gap.">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Workforce analytics | Chiru Gowda">
+<meta property="og:description" content="Monthly HR reporting for a fictional 1,000-person organisation: headcount against plan, turnover, salary budgets and the pay gap.">
+<meta property="og:type" content="website">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css?v=20261118h">
+<link rel="stylesheet" href="../assets/lab.css?v=20261120b">
+<link rel="stylesheet" href="../assets/data.css?v=20261128a">
+<script>document.documentElement.classList.add("js")</script>
+<script defer src="../assets/site.js?v=20261118h"></script>
+<script defer src="../assets/lab.js?v=20261120b"></script>
+<script defer src="../assets/data.js?v=20261128a"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ambient" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+<header class="site-header"><div class="nav-bar glass">
+<a class="brand" href="../index.html" aria-label="Chiru Gowda, home">Chiru Gowda<span>.</span></a>
+<nav class="nav-links" id="nav-links" aria-label="Main"><a href="../index.html#work">Projects</a><a href="../index.html#skills">Skills</a><a href="../about.html">Off the clock</a></nav>
+<a class="button button-small" href="../index.html#contact">Contact</a>
+<button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links"><svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg><svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</div></header>
+<main id="main" class="wrap">
+<p class="breadcrumb"><a href="../index.html#work">Projects</a> <span aria-hidden="true">/</span> <span aria-current="page">Workforce analytics</span></p>
+<section class="case-hero" aria-labelledby="case-title">
+<h1 id="case-title">Workforce<span>analytics.</span></h1>
+<p class="case-lede">I built a monthly HR reporting pack: headcount against plan, turnover, salary against budget and the gender pay gap.</p>
+<dl class="case-meta glass"><div><dt>My role</dt><dd>Data analyst</dd></div><div><dt>Data</dt><dd>Fictional, generated</dd></div><div><dt>Built with</dt><dd>SQL, Excel, Python</dd></div></dl>
+</section>
+<section class="stats glass" aria-label="Key numbers" data-reveal><div class="stat"><strong>875</strong><span>people in October</span></div><div class="stat"><strong>+16</strong><span>above planned headcount</span></div><div class="stat"><strong>$229k</strong><span>over monthly salary budget</span></div><div class="stat"><strong>2.4%</strong><span>monthly turnover</span></div><p class="stats-note">October 2026, from fictional data. No real employees are represented.</p></section>
+<section class="case-section" aria-labelledby="summary-title">
+<h2 id="summary-title">Overview</h2>
+<div class="card-grid"><article class="info-card glass" data-reveal><h3>The question</h3><p>Are we hiring to plan, and can we afford the people we have?</p></article><article class="info-card glass" data-reveal><h3>What I did</h3><p>Built the data model, the monthly measures and a filterable Excel reporting pack.</p></article><article class="info-card glass" data-reveal><h3>What it showed</h3><p>Headcount ran ahead of plan from April, so salary spend outgrew budget. The overspend was spread across seven departments.</p></article></div>
+</section>
+<section class="lab app-data" aria-labelledby="visual-title"><div class="lab-head" data-reveal><h2 id="visual-title">Explore the data</h2><p>Every chart below uses the October 2026 reporting pack's figures.</p></div>
+<div class="lab-block glass is-wide" data-reveal><div class="lab-note"><small>Headcount</small><h3>Above plan every month since April</h3><p>Drag through the year. The shaded gap is headcount above plan.</p></div><div class="lab-stage" data-headcount><div class="dash-kpis"><div class="dash-kpi"><small>Month</small><strong data-out="month">…</strong></div><div class="dash-kpi"><small>Headcount</small><strong data-out="hc">…</strong></div><div class="dash-kpi"><small>Against plan</small><strong data-out="var">…</strong></div><div class="dash-kpi"><small>Salary vs budget</small><strong data-out="sal">…</strong></div></div><svg class="linechart" viewBox="0 0 640 230" role="img" aria-label="Monthly headcount against plan, January to October 2026"></svg><input class="lab-range" type="range" min="0" max="9" value="9" aria-label="Choose a month"><div class="readout"><span data-out="note"></span><span class="legend"><span><i></i>Headcount</span><span><i class="dash"></i>Plan</span></span></div></div></div>
+<div class="lab-block glass" data-reveal><div class="lab-note"><small>Departments</small><h3>Where the variance sits</h3><p>October, by department. Orange is over plan or over budget.</p><div class="lab-choice"><span><b>Shows</b>Actual minus plan</span><span><b>Why</b>Totals hid an Operations shortfall</span></div></div><div class="lab-stage" data-dept data-seg-root><div class="stage-bar"><div class="seg" role="group" aria-label="Variance measure"><button type="button" data-v="headcount" aria-pressed="true">Headcount</button><button type="button" data-v="salary" aria-pressed="false">Salary</button></div><span>October 2026</span></div><div class="hbars"></div><p class="readout" data-out="dept"></p></div></div>
+<div class="lab-block glass" data-reveal><div class="lab-note"><small>Movement</small><h3>Hiring outpaced exits every month but March</h3><p>Net change in headcount each month: hires minus exits.</p></div><div class="lab-stage" data-flow-cols><div class="vbars"></div><p class="readout" data-out="flow"></p></div></div>
+</section>
+<details class="notes glass" data-reveal><summary><span><strong>Method &amp; definitions</strong><small>How each number is calculated, and what it can't tell you</small></span><span class="chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary>
+<div class="notes-body">
+<h3>The data</h3><p>A fictional organisation of about 1,000 employee records across eight departments, January to October 2026, in Australian dollars. The data is synthetic, so the reporting could be built and tested without anyone's personal data.</p>
+<h3>What I built</h3><ul><li><strong>SQL pipeline:</strong> monthly snapshots of headcount, FTE, hires and exits, joined to plan and salary budget tables.</li><li><strong>Excel workbook:</strong> a reporting pack with month and department filters, variance highlighting and a headcount-against-plan chart.</li><li><strong>Compensation planning model:</strong> salary against budget by department, ready for what-if changes.</li><li><strong>Power BI:</strong> practice files that rebuild the same measures.</li></ul>
+<h3>Definitions</h3><ul><li><strong>Turnover</strong> = monthly exits ÷ average of opening and closing headcount.</li><li><strong>Salary actual</strong> is monthly base salary. It excludes employer on-costs and bonuses.</li><li><strong>Mean base pay gap</strong> = 1 − mean women's FTE annual base pay ÷ mean men's. It's suppressed when either group has fewer than 10 people, so small teams can't be identified.</li></ul>
+<p>October 2026: 875 people, 833.0 FTE, 40.9% women, 2.5% mean base pay gap.</p>
+<div class="toolset"><span class="toolset-label">Tools used</span><ul class="tool-logos" aria-label="Tools used"><li title="SQL"><img src="../assets/logos/sql.svg" alt="SQL" width="24" height="24" loading="lazy"></li><li title="Python"><img src="../assets/logos/python.svg" alt="Python" width="24" height="24" loading="lazy"></li><li title="pandas"><img src="../assets/logos/pandas.svg" alt="pandas" width="24" height="24" loading="lazy"></li><li title="Power BI"><img src="../assets/logos/powerbi.svg" alt="Power BI" width="24" height="24" loading="lazy"></li></ul></div></div></details>
+<nav class="case-next" aria-label="More projects"><a class="glass is-lit" href="afl-crowd-monitoring.html"><small>Back</small><span>AFL crowd monitoring</span></a><a class="glass is-lit" href="retail-sales-analytics.html"><small>Next project</small><span>Retail sales analytics →</span></a></nav>
+</main>
+<footer class="wrap site-footer">
+<span>© 2026 Chiru Gowda · Melbourne</span>
+<nav aria-label="Footer"><a href="../index.html#work">Projects</a><a href="../about.html">Off the clock</a><a href="mailto:chiranthgowdaofficial@gmail.com">Email</a><a href="https://www.linkedin.com/in/chiranthgowdaofficial" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://github.com/chiranthgowdaxaus" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+</footer>
+<script type="application/json" id="dataset">{"kind":"workforce","months":[{"label":"Jan","name":"January 2026","headcount":794,"plan":789,"hires":25,"exits":11,"salary":5961400,"budget":5978713},{"label":"Feb","name":"February 2026","headcount":803,"plan":796,"hires":24,"exits":15,"salary":6077497,"budget":6037908},{"label":"Mar","name":"March 2026","headcount":800,"plan":804,"hires":10,"exits":13,"salary":6084689,"budget":6097103},{"label":"Apr","name":"April 2026","headcount":816,"plan":811,"hires":22,"exits":6,"salary":6159117,"budget":6156298},{"label":"May","name":"May 2026","headcount":831,"plan":818,"hires":23,"exits":8,"salary":6266498,"budget":6215493},{"label":"Jun","name":"June 2026","headcount":836,"plan":826,"hires":16,"exits":11,"salary":6379459,"budget":6274689},{"label":"Jul","name":"July 2026","headcount":856,"plan":835,"hires":30,"exits":10,"salary":6479480,"budget":6333884},{"label":"Aug","name":"August 2026","headcount":864,"plan":842,"hires":20,"exits":12,"salary":6619569,"budget":6393079},{"label":"Sep","name":"September 2026","headcount":867,"plan":850,"hires":21,"exits":18,"salary":6676149,"budget":6452274},{"label":"Oct","name":"October 2026","headcount":875,"plan":859,"hires":29,"exits":21,"salary":6740684,"budget":6511469}],"departments":[{"name":"Sales","headcount":173,"plan":155,"salary":1312047,"budget":1194833,"exits":3},{"name":"Customer Service","headcount":99,"plan":98,"salary":717280,"budget":689646,"exits":2},{"name":"Operations","headcount":164,"plan":185,"salary":1248599,"budget":1348344,"exits":10},{"name":"Finance","headcount":95,"plan":96,"salary":790715,"budget":776755,"exits":4},{"name":"Human Resources","headcount":69,"plan":66,"salary":511774,"budget":477002,"exits":0},{"name":"IT & Digital","headcount":121,"plan":109,"salary":977261,"budget":878093,"exits":0},{"name":"Marketing","headcount":89,"plan":87,"salary":703864,"budget":671656,"exits":1},{"name":"Corporate Services","headcount":65,"plan":63,"salary":479145,"budget":475140,"exits":1}]}</script>
+</body>
+</html>
